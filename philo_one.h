@@ -11,24 +11,25 @@
 // remove
 #include <stdio.h>
 
-typedef struct	s_info
+typedef struct		s_info
 {
-	int 		n_phil;
-	int 		t_die;
-	int 		t_eat;
-	int 		t_sleep;
-	int 		eat_times;
-	long		start_time;
-}				t_info;
+	int 			n_phil;
+	int 			t_die;
+	int 			t_eat;
+	int 			t_sleep;
+	int 			eat_times;
+	long			start_time;
+}					t_info;
 
-typedef struct	s_philo
+typedef struct		s_philo
 {
-//	fork 1
-//	fork 2
-	int 		eat_times;
-	long 		t_last_eat;
-	long		start_time;
-}				t_philo;
-
+	int 			id;
+	pthread_mutex_t	*waiter;
+	pthread_mutex_t	*fork_l;
+	pthread_mutex_t	*fork_r;
+	int 			eat_times;
+	long 			t_last_eat;
+	long			start_time;
+}					t_philo;
 
 #endif //PHILOSOPHERS_PHILO_ONE_H
