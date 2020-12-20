@@ -7,6 +7,7 @@
 
 #include <sys/time.h>
 #include "utils/utils.h"
+#include <pthread.h>
 // remove
 #include <stdio.h>
 
@@ -22,8 +23,11 @@ typedef struct	s_info
 
 typedef struct	s_philo
 {
-	int 		mut;
+//	fork 1
+//	fork 2
+	int 		eat_times;
 	long 		t_last_eat;
+	long		start_time;
 }				t_philo;
 
 
