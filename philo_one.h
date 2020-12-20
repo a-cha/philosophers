@@ -28,7 +28,7 @@ typedef struct		s_philo
 	pthread_mutex_t	*fork_l;
 	pthread_mutex_t	*fork_r;
 	int 			eat_times;
-	long 			t_last_eat;
+	long 			last_eat_time;
 	long			start_time;
 }					t_philo;
 
