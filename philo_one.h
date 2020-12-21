@@ -18,6 +18,7 @@ typedef struct		s_info
 	int 			t_eat;
 	int 			t_sleep;
 	int 			eat_times;
+//	do I really need timestamp here?
 	long			start_time;
 }					t_info;
 
@@ -27,6 +28,9 @@ typedef struct		s_philo
 	pthread_mutex_t	*waiter;
 	pthread_mutex_t	*fork_l;
 	pthread_mutex_t	*fork_r;
+	int 			t_die;
+	int 			t_eat;
+	int 			t_sleep;
 	int 			eat_times;
 	long 			last_eat_time;
 	long			start_time;
