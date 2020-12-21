@@ -44,9 +44,7 @@ static void			init_philos(int n, t_philo *philos, char **av)
 
 	init_forks(n, forks);
 	pthread_mutex_init(waiter, NULL);
-	pthread_mutex_unlock(waiter);
 	pthread_mutex_init(printing, NULL);
-	pthread_mutex_unlock(printing);
 	i = -1;
 	while (++i < n)
 	{
@@ -68,8 +66,5 @@ static void			init_forks(int n, pthread_mutex_t *forks)
 
 	i = -1;
 	while (++i < n)
-	{
 		pthread_mutex_init(&forks[i], NULL);
-		pthread_mutex_unlock(&forks[i]);
-	}
 }
