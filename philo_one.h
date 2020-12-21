@@ -11,17 +11,6 @@
 // remove
 #include <stdio.h>
 
-typedef struct		s_info
-{
-	int 			n_phil;
-	int 			t_die;
-	int 			t_eat;
-	int 			t_sleep;
-	int 			eat_times;
-//	do I really need timestamp here?
-	long			start_time;
-}					t_info;
-
 typedef struct		s_philo
 {
 	int 			id;
@@ -32,8 +21,10 @@ typedef struct		s_philo
 	int 			t_eat;
 	int 			t_sleep;
 	int 			eat_times;
-	long 			last_eat_time;
 	long			start_time;
+	long 			last_eat_time;
 }					t_philo;
+
+void 				*life_cycle(void *data);
 
 #endif //PHILOSOPHERS_PHILO_ONE_H
