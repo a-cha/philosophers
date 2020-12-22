@@ -15,14 +15,14 @@
 void	ft_mysleep(long sleep)
 {
 	struct timeval	mark_t;
-	long			start;
+	long			finish;
 	long			current;
 
 	if (gettimeofday(&mark_t, NULL))
 		return ;
-	start = mark_t.tv_sec * 1000000 + mark_t.tv_usec + sleep;
+	finish = mark_t.tv_sec * 1000000 + mark_t.tv_usec + sleep;
 	current = 0;
-	while (current < start)
+	while (current < finish)
 	{
 		usleep(500);
 		if (gettimeofday(&mark_t, NULL))

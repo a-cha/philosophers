@@ -6,7 +6,7 @@
 /*   By: sadolph <sadolph@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/21 15:45:35 by sadolph           #+#    #+#             */
-/*   Updated: 2020/12/21 20:50:02 by sadolph          ###   ########.fr       */
+/*   Updated: 2020/12/22 17:12:26 by sadolph          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,12 @@ int					main(int ac, char **av)
 	i = -1;
 	while (++i < n_philos)
 		pthread_join(threads[i], NULL);
+	i = -1;
+	pthread_mutex_destroy(philos[i].waiter);
+	pthread_mutex_destroy(philos[i].printing);
+	pthread_mutex_destroy(philos[i].time);
+	while (++i < n_philos)
+		pthread_mutex_destroy(philos[i].fork_l);
 	return (0);
 }
 
@@ -40,17 +46,20 @@ static void			init_philos(int n, t_philo *philos, char **av)
 	pthread_mutex_t forks[n];
 	pthread_mutex_t	waiter[1];
 	pthread_mutex_t	printing[1];
+	pthread_mutex_t	time[1];
 	int				i;
 
 	init_forks(n, forks);
 	pthread_mutex_init(waiter, NULL);
 	pthread_mutex_init(printing, NULL);
+	pthread_mutex_init(time, NULL);
 	i = -1;
 	while (++i < n)
 	{
 		philos[i].id = i + 1;
 		philos[i].waiter = waiter;
 		philos[i].printing = printing;
+		philos[i].time = time;
 		philos[i].fork_l = &forks[i];
 		philos[i].fork_r = &forks[(i + 1) % n];
 		philos[i].t_die = ft_atoi(av[2]);

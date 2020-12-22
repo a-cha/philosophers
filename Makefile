@@ -6,13 +6,13 @@
 #    By: sadolph <sadolph@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/21 22:17:11 by sadolph           #+#    #+#              #
-#    Updated: 2020/12/21 23:02:20 by sadolph          ###   ########.fr        #
+#    Updated: 2020/12/22 17:05:14 by sadolph          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Compile
 CC := gcc
-CFLAGS := #-Wall -Wextra -Werror
+CFLAGS := -Wall -Wextra -Werror
 
 # Directories
 INC_HERE := philo_one.h
@@ -26,7 +26,7 @@ NAME := philo_one
 SRC :=					\
 philo_one.c				\
 life_cycle.c			\
-
+print_status.c			\
 
 all: $(NAME)
 
