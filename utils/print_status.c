@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mysleep.c                                          :+:      :+:    :+:   */
+/*   print_status.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sadolph <sadolph@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/21 20:10:03 by sadolph           #+#    #+#             */
-/*   Updated: 2020/12/23 20:24:00 by sadolph          ###   ########.fr       */
+/*   Created: 2020/12/23 18:08:59 by sadolph           #+#    #+#             */
+/*   Updated: 2020/12/23 20:20:41 by sadolph          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "philo_one.h"
 #include "utils.h"
 
-void	ft_mysleep(long sleep)
+void				print_status(t_philo *philo, char *msg)
 {
 	struct timeval	mark_t;
-	long			finish;
-	long			current;
 
+	pthread_mutex_lock(philo->printing);
 	if (gettimeofday(&mark_t, NULL))
 		return ;
-	finish = mark_t.tv_sec * 1000000 + mark_t.tv_usec + sleep;
-	current = 0;
-	while (current < finish)
-	{
-//		usleep(100);
-		if (gettimeofday(&mark_t, NULL))
-			return ;
-		current = mark_t.tv_sec * 1000000 + mark_t.tv_usec;
-	}
+	ft_putnbr_fd((int)((mark_t.tv_sec * 1000 + mark_t.tv_usec / 1000)
+										- philo->start_time / 1000), 1);
+	write(1, " ", 1);
+	ft_putnbr_fd(philo->id, 1);
+	ft_putstr_fd(msg, 1);
+	pthread_mutex_unlock(philo->printing);
 }
