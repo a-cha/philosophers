@@ -14,7 +14,7 @@
 
 static void			init_philos(int n, t_philo *philos, char **av);
 static void			init_forks(int n, pthread_mutex_t *forks);
-static void			init_table(int n, t_table *forks);
+static t_table		*init_table(int n);
 
 int					main(int ac, char **av)
 {
@@ -44,10 +44,10 @@ int					main(int ac, char **av)
 
 static void			init_philos(int n, t_philo *philos, char **av)
 {
-	t_table			table[1];
+	t_table			*table;
 	int				i;
 
-	init_table(n, table);
+	table = init_table(n);
 	i = -1;
 	while (++i < n)
 	{
@@ -71,19 +71,26 @@ static void			init_forks(int n, pthread_mutex_t *forks)
 		pthread_mutex_init(&forks[i], NULL);
 }
 
-static void			init_table(int n, t_table *table)
+static t_table		*init_table(int n)
 {
-	pthread_mutex_t	waiter[1];
-	pthread_mutex_t	printing[1];
-	pthread_mutex_t	time[1];
-	pthread_mutex_t forks[n];
+	pthread_mutex_t	*waiter;
+	pthread_mutex_t	*printing;
+	pthread_mutex_t	*time;
+	pthread_mutex_t *forks;
+	t_table			*table;
 
+	waiter = malloc(sizeof(pthread_mutex_t));
+	printing = malloc(sizeof(pthread_mutex_t));
+	time = malloc(sizeof(pthread_mutex_t));
 	pthread_mutex_init(waiter, NULL);
 	pthread_mutex_init(printing, NULL);
 	pthread_mutex_init(time, NULL);
+	table = malloc(sizeof(t_table));
 	table->waiter = waiter;
 	table->printing = printing;
 	table->time = time;
+	forks = malloc(n * sizeof(pthread_mutex_t));
 	init_forks(n, forks);
 	table->forks = forks;
+	return (table);
 }

@@ -13,13 +13,13 @@ void				print_status(t_philo *philo, char *msg)
 		return ;
 	ft_putnbr_fd((int)((mark_t.tv_sec * 1000 + mark_t.tv_usec / 1000)
 												- philo->start_time), 1);
-	write(1, "A", 1);
+//	write(1, "A", 1);
 	write(1, " ", 1);
-	write(1, "B", 1);
+//	write(1, "B", 1);
 	ft_putnbr_fd(philo->id, 1);
-	write(1, "C", 1);
+//	write(1, "C", 1);
 	ft_putstr_fd(msg, 1);
-	write(1, "D", 1);
+//	write(1, "D", 1);
 	pthread_mutex_unlock(philo->table->printing);
 }
 
