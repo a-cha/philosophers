@@ -6,7 +6,7 @@
 /*   By: sadolph <sadolph@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/21 15:45:38 by sadolph           #+#    #+#             */
-/*   Updated: 2020/12/24 14:28:01 by sadolph          ###   ########.fr       */
+/*   Updated: 2020/12/24 17:21:08 by sadolph          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <pthread.h>
+
+char	g_check_die;
 
 typedef struct		s_philo
 {
@@ -36,6 +38,6 @@ typedef struct		s_philo
 
 void				*life_cycle(void *data);
 void 				print_status(t_philo *philo, char *msg);
-void			 	check_die(t_philo *philo);
+void			 	*check_die(void *data);
 
 #endif

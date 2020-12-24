@@ -6,7 +6,7 @@
 /*   By: sadolph <sadolph@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/21 16:06:13 by sadolph           #+#    #+#             */
-/*   Updated: 2020/12/24 14:28:01 by sadolph          ###   ########.fr       */
+/*   Updated: 2020/12/24 17:29:49 by sadolph          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,20 @@ void 				*life_cycle(void *data)
 {
 	struct timeval	mark_t;
 	t_philo			*philo;
-//	pthread_t		thread[1];
+	pthread_t		thread[1];
 
+	g_check_die = 0;
 	philo = (t_philo *)data;
 	pthread_mutex_lock(philo->time);
 	if (gettimeofday(&mark_t, NULL))
 		return (NULL);
 	philo->start_time = mark_t.tv_sec * 1000000 + mark_t.tv_usec;
 	philo->last_eat = philo->start_time;
-//	pthread_create(thread, NULL, &check_die, philo);
 	pthread_mutex_unlock(philo->time);
+	pthread_create(thread, NULL, &check_die, data);
+	pthread_detach(*thread);
+//	if (!(pthread_join(*thread, NULL)))
+//		return (NULL);
 	while (1)
 	{
 //		take_forks(philo);
@@ -37,6 +41,11 @@ void 				*life_cycle(void *data)
 		print_status(philo, " is sleeping\n");
 		ft_mysleep(philo->t_sleep * 1000);
 		print_status(philo, " is thinking\n");
+		if (g_check_die)
+		{
+			pthread_join(*thread, NULL);
+			return (NULL);
+		}
 	}
 }
 

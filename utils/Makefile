@@ -30,6 +30,7 @@ ft_putstr_fd.c			\
 ft_putnbr_fd.c			\
 ft_mysleep.c			\
 print_status.c			\
+check_die.c				\
 #ft_strjoin.c			\
 
 OBJ := ${SRC:.c=.o}
