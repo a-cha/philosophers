@@ -6,11 +6,12 @@
 /*   By: sadolph <sadolph@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/21 16:06:13 by sadolph           #+#    #+#             */
-/*   Updated: 2020/12/22 16:20:09 by sadolph          ###   ########.fr       */
+/*   Updated: 2020/12/23 21:41:03 by sadolph          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_one.h"
+#include "utils.h"
 
 static void			take_forks(t_philo *philo);
 static void			eating(t_philo *philo);
@@ -21,10 +22,12 @@ void 				*life_cycle(void *data)
 	t_philo			*philo;
 
 	philo = (t_philo *)data;
+	pthread_mutex_lock(philo->time);
 	if (gettimeofday(&mark_t, NULL))
 		return (NULL);
-	philo->start_time = mark_t.tv_sec * 1000 + mark_t.tv_usec / 1000;
-	philo->last_eat_time = mark_t.tv_sec * 1000 + mark_t.tv_usec / 1000;
+	philo->start_time = mark_t.tv_sec * 1000000 + mark_t.tv_usec;
+	philo->last_eat_time = mark_t.tv_sec * 1000000 + mark_t.tv_usec;
+	pthread_mutex_unlock(philo->time);
 	while (1)
 	{
 		take_forks(philo);
@@ -50,12 +53,12 @@ static void			eating(t_philo *philo)
 	struct timeval	mark_t;
 
 	print_status(philo, " is eating\n");
-	ft_mysleep((long)philo->t_eat * 1000);
-	pthread_mutex_unlock(philo->fork_l);
-	pthread_mutex_unlock(philo->fork_r);
 	pthread_mutex_lock(philo->time);
 	if (gettimeofday(&mark_t, NULL))
 		return ;
-	philo->last_eat_time = mark_t.tv_sec * 1000 + mark_t.tv_usec / 1000;
+	philo->last_eat_time = mark_t.tv_sec * 1000000 + mark_t.tv_usec;
 	pthread_mutex_unlock(philo->time);
+	ft_mysleep((long)philo->t_eat * 1000);
+	pthread_mutex_unlock(philo->fork_l);
+	pthread_mutex_unlock(philo->fork_r);
 }

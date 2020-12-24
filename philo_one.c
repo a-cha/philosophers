@@ -6,7 +6,7 @@
 /*   By: sadolph <sadolph@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/21 15:45:35 by sadolph           #+#    #+#             */
-/*   Updated: 2020/12/23 21:20:14 by sadolph          ###   ########.fr       */
+/*   Updated: 2020/12/23 21:34:47 by sadolph          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ int						main(int ac, char **av)
 	i = -1;
 	while (++i < n_philos)
 		pthread_join(threads[i], NULL);
+//	i = -1;
 //	while (++i < n_philos)
 //		pthread_detach(threads[i]);
-	i = -1;
 	pthread_mutex_destroy(philos[i].waiter);
 	pthread_mutex_destroy(philos[i].printing);
 	pthread_mutex_destroy(philos[i].time);
