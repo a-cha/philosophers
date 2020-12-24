@@ -6,7 +6,7 @@
 /*   By: sadolph <sadolph@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/21 15:50:52 by sadolph           #+#    #+#             */
-/*   Updated: 2020/12/21 23:43:17 by sadolph          ###   ########.fr       */
+/*   Updated: 2020/12/24 14:10:45 by sadolph          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ size_t	ft_strlen(const char *str);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 char	*ft_strjoin(char const *s1, char const *s2);
-void	ft_mysleep(long sleep);
+void	ft_mysleep(int sleep);
 
 #endif

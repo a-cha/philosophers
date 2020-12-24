@@ -6,27 +6,27 @@
 /*   By: sadolph <sadolph@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/21 20:10:03 by sadolph           #+#    #+#             */
-/*   Updated: 2020/12/24 12:18:43 by sadolph          ###   ########.fr       */
+/*   Updated: 2020/12/24 14:21:44 by sadolph          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-void	ft_mysleep(long sleep)
+void	ft_mysleep(int sleep)
 {
 	struct timeval	mark_t;
-	long			finish;
-	long			current;
+	int				finish;
+	int				current;
 
 	if (gettimeofday(&mark_t, NULL))
 		return ;
-	finish = mark_t.tv_sec * 1000000 + mark_t.tv_usec + sleep;
+	finish = (int)(mark_t.tv_sec % 1000 * 1000000 + mark_t.tv_usec + sleep);
 	current = 0;
 	while (current < finish)
 	{
-		usleep(20);
+		usleep(10);
 		if (gettimeofday(&mark_t, NULL))
 			return ;
-		current = mark_t.tv_sec * 1000000 + mark_t.tv_usec;
+		current = (int)(mark_t.tv_sec % 1000 * 1000000 + mark_t.tv_usec);
 	}
 }

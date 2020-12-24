@@ -6,7 +6,7 @@
 /*   By: sadolph <sadolph@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/21 15:45:35 by sadolph           #+#    #+#             */
-/*   Updated: 2020/12/23 21:34:47 by sadolph          ###   ########.fr       */
+/*   Updated: 2020/12/24 14:28:01 by sadolph          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int						main(int ac, char **av)
 //	i = -1;
 //	while (++i < n_philos)
 //		pthread_detach(threads[i]);
-	pthread_mutex_destroy(philos[i].waiter);
+//	pthread_mutex_destroy(philos[i].waiter);
 	pthread_mutex_destroy(philos[i].printing);
 	pthread_mutex_destroy(philos[i].time);
 	while (++i < n_philos)
@@ -50,13 +50,13 @@ int						main(int ac, char **av)
 
 static void				init_philos(int n, t_philo *philos, char **av)
 {
-	pthread_mutex_t		*waiter;
+//	pthread_mutex_t		*waiter;
 	pthread_mutex_t		*printing;
 	pthread_mutex_t		*time;
 	pthread_mutex_t 	*forks;
 	int					i;
 
-	waiter = init_mutex();
+//	waiter = init_mutex();
 	printing = init_mutex();
 	time = init_mutex();
 	forks = init_forks(n);
@@ -64,9 +64,9 @@ static void				init_philos(int n, t_philo *philos, char **av)
 	while (++i < n)
 	{
 		philos[i].id = i + 1;
-		philos[i].fork_l = &forks[i];
-		philos[i].fork_r = &forks[(i + 1) % n];
-		philos[i].waiter = waiter;
+		philos[i].fork_l = &forks[philos[i].id % 2 ? i : (i + 1) % n];
+		philos[i].fork_r = &forks[philos[i].id % 2 ? (i + 1) % n : i];
+//		philos[i].waiter = waiter;
 		philos[i].printing = printing;
 		philos[i].time = time;
 		philos[i].t_die = ft_atoi(av[2]);
