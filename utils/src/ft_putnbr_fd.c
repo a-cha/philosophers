@@ -1,19 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_putnbrs.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sadolph <sadolph@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/03 20:03:22 by sadolph           #+#    #+#             */
-/*   Updated: 2020/10/13 15:04:23 by sadolph          ###   ########.fr       */
+/*   Updated: 2021/01/11 18:16:19 by sadolph          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-void	ft_putstr_fd(char *s, int fd)
+void	ft_putnbr_fd(int n, int fd)
 {
-	if (fd >= 0 && s)
-		write(fd, s, ft_strlen(s));
+	char	c;
+
+	if (n == -2147483648)
+	{
+		write(fd, "-2147483648", 11);
+		return ;
+	}
+	if (n < 0)
+	{
+		n *= -1;
+		write(fd, "-", 1);
+	}
+	if (n > 9)
+		ft_putnbr_fd(n / 10, fd);
+	c = n % 10 + 48;
+	write(1, &c, fd);
 }

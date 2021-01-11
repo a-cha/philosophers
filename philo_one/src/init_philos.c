@@ -1,62 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_one.c                                        :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sadolph <sadolph@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/21 15:45:35 by sadolph           #+#    #+#             */
-/*   Updated: 2020/12/24 14:28:01 by sadolph          ###   ########.fr       */
+/*   Created: 2021/01/11 23:36:29 by sadolph           #+#    #+#             */
+/*   Updated: 2021/01/11 23:38:02 by sadolph          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_one.h"
 #include "utils.h"
 
-static void				init_philos(int n, t_philo *philos, char **av);
 static pthread_mutex_t	*init_forks(int n);
 static pthread_mutex_t	*init_mutex();
 
-int						main(int ac, char **av)
+void					init_philos(int n, t_philo *philos, char **av)
 {
-	int					i;
-	int					n_philos;
-	t_philo				philos[av[1] ? ft_atoi(av[1]) : 0];
-	pthread_t			threads[av[1] ? ft_atoi(av[1]) : 0];
-
-	if (ac < 5 || ac > 6)
-		return (-1);
-	n_philos = ft_atoi(av[1]);
-	init_philos(n_philos, philos, av);
-	i = -1;
-	while (++i < n_philos)
-		pthread_create(&threads[i], NULL, &life_cycle, &philos[i]);
-//	pthread_create(&threads[0], NULL, &life_cycle, &philos[0]);
-//	pthread_join(threads[0], NULL);
-//	pthread_detach(threads[0]);
-	i = -1;
-	while (++i < n_philos)
-		pthread_join(threads[i], NULL);
-//	i = -1;
-//	while (++i < n_philos)
-//		pthread_detach(threads[i]);
-//	pthread_mutex_destroy(philos[i].waiter);
-	pthread_mutex_destroy(philos[i].printing);
-	pthread_mutex_destroy(philos[i].time);
-	while (++i < n_philos)
-		pthread_mutex_destroy(philos[i].fork_l);
-	return (0);
-}
-
-static void				init_philos(int n, t_philo *philos, char **av)
-{
-//	pthread_mutex_t		*waiter;
 	pthread_mutex_t		*printing;
 	pthread_mutex_t		*time;
 	pthread_mutex_t 	*forks;
 	int					i;
 
-//	waiter = init_mutex();
 	printing = init_mutex();
 	time = init_mutex();
 	forks = init_forks(n);
@@ -66,7 +32,6 @@ static void				init_philos(int n, t_philo *philos, char **av)
 		philos[i].id = i + 1;
 		philos[i].fork_l = &forks[philos[i].id % 2 ? i : (i + 1) % n];
 		philos[i].fork_r = &forks[philos[i].id % 2 ? (i + 1) % n : i];
-//		philos[i].waiter = waiter;
 		philos[i].printing = printing;
 		philos[i].time = time;
 		philos[i].t_die = ft_atoi(av[2]);

@@ -36,6 +36,7 @@ typedef struct		s_philo
 	long			last_eat;
 }					t_philo;
 
+void				init_philos(int n, t_philo *philos, char **av);
 void				*life_cycle(void *data);
 void 				print_status(t_philo *philo, char *msg);
 void			 	*check_die(void *data);

@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_status.c                                     :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sadolph <sadolph@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/23 18:08:59 by sadolph           #+#    #+#             */
-/*   Updated: 2020/12/24 14:38:36 by sadolph          ###   ########.fr       */
+/*   Created: 2020/12/21 15:51:04 by sadolph           #+#    #+#             */
+/*   Updated: 2021/01/11 18:16:19 by sadolph          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo_one.h"
 #include "utils.h"
 
-void				print_status(t_philo *philo, char *msg)
+size_t		ft_strlen(const char *str)
 {
-	struct timeval	mark_t;
+	size_t	i;
 
-	pthread_mutex_lock(philo->printing);
-	if (gettimeofday(&mark_t, NULL))
-		return ;
-	ft_putnbr_fd((int)((mark_t.tv_sec * 1000 + mark_t.tv_usec / 1000)
-										- philo->start_time / 1000), 1);
-	write(1, " ", 1);
-	ft_putnbr_fd(philo->id, 1);
-	ft_putstr_fd(msg, 1);
-	pthread_mutex_unlock(philo->printing);
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
 }

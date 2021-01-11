@@ -6,7 +6,7 @@
 /*   By: sadolph <sadolph@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/21 16:06:13 by sadolph           #+#    #+#             */
-/*   Updated: 2020/12/24 17:29:49 by sadolph          ###   ########.fr       */
+/*   Updated: 2021/01/11 23:35:42 by sadolph          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,11 @@ void 				*life_cycle(void *data)
 		print_status(philo, " is sleeping\n");
 		ft_mysleep(philo->t_sleep * 1000);
 		print_status(philo, " is thinking\n");
-		if (g_check_die)
-		{
-			pthread_join(*thread, NULL);
-			return (NULL);
-		}
+//		if (g_check_die)
+//		{
+//			pthread_join(*thread, NULL);
+//			return (NULL);
+//		}
 	}
 }
 
