@@ -17,3 +17,12 @@ void	ft_putstr_fd(char *s, int fd)
 	if (fd >= 0 && s)
 		write(fd, s, ft_strlen(s));
 }
+int		ft_putstr_str(char *s1, char *s2)
+{
+	int len;
+
+	len = ft_strlen(s2);
+	while (*s2)
+		*s1++ = *s2++;
+	return (len);
+}

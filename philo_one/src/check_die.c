@@ -6,29 +6,64 @@
 /*   By: sadolph <sadolph@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 18:56:46 by sadolph           #+#    #+#             */
-/*   Updated: 2021/01/11 23:35:42 by sadolph          ###   ########.fr       */
+/*   Updated: 2021/01/12 23:39:15 by sadolph          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_one.h"
 
-void	*check_die(void *data)
+//void				*check_die(void *data)
+//{
+//	struct timeval	mark_t;
+//	t_philo			*philo;
+//	long			current;
+//
+//	philo = data;
+//	current = 0;
+//	while (!g_check_die)
+//		;
+//	while (current < philo->last_eat + philo->t_die * 1000)
+//	{
+//		usleep(10);
+//		if (gettimeofday(&mark_t, NULL))
+//			return (0);
+//		current = mark_t.tv_sec * 1000000 + mark_t.tv_usec;
+//	}
+//	print_status(philo, " IS DIED\n");
+//	return (0);
+//}
+
+void				*check_die(void *data)
 {
 	struct timeval	mark_t;
 	t_philo			*philo;
 	long			current;
+	int 			i;
 
+	while (!g_check_die)
+		;
 	philo = data;
 	current = 0;
-	while (!g_check_die && current < philo->last_eat + philo->t_die * 1000)
+	while (1)
 	{
-		usleep(10);
-		if (gettimeofday(&mark_t, NULL))
+		i = -1;
+		if (g_is_satisfied == g_n_philos)
 			return (0);
-		current = mark_t.tv_sec * 1000000 + mark_t.tv_usec;
+		while (++i < g_n_philos)
+		{
+			if (current < (&philo[i])->last_eat + (&philo[i])->t_die * 1000)
+			{
+				usleep(10);
+				if (gettimeofday(&mark_t, NULL))
+					return (0);
+				current = mark_t.tv_sec * 1000000 + mark_t.tv_usec;
+			}
+			else
+			{
+				print_status(&philo[i], " IS DIED\n");
+				pthread_mutex_lock(philo->printing);
+				return (0);
+			}
+		}
 	}
-	print_status(philo, " IS DIED\n");
-//	pthread_mutex_lock(philo->printing);
-	g_check_die = 1;
-	return (0);
 }
