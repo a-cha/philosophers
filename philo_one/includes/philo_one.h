@@ -6,7 +6,7 @@
 /*   By: sadolph <sadolph@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/21 15:45:38 by sadolph           #+#    #+#             */
-/*   Updated: 2021/01/12 23:39:15 by sadolph          ###   ########.fr       */
+/*   Updated: 2021/01/13 17:11:53 by sadolph          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,12 @@
 # include <unistd.h>
 # include <pthread.h>
 
+# define TAKE_FORK " has taken a fork\n"
+# define EATING "\e[0;32m is eating\033[0m\n"
+# define THINKING " is thinking\n"
+# define SLEEPING " is sleeping\n"
+# define DIED "\033[31m is died\033[0m\n"
+
 char	g_check_die;
 int 	g_n_philos;
 int 	g_is_satisfied;
@@ -25,9 +31,10 @@ int 	g_is_satisfied;
 typedef struct		s_philo
 {
 	int				id;
+	int 			check_die;
 	pthread_mutex_t	*fork_l;
 	pthread_mutex_t	*fork_r;
-	pthread_mutex_t	*satisfied;
+//	pthread_mutex_t	*satisfied;
 	pthread_mutex_t	*printing;
 	pthread_mutex_t	*time;
 	pthread_t		*thread;

@@ -20,7 +20,7 @@
 int		ft_atoi(const char *str);
 char	*ft_itoa(int n);
 size_t	ft_strlen(const char *str);
-void	ft_putstr_fd(char *s, int fd);
+void	ft_putstr(char *s);
 int		ft_putnbr_str(int n, char *str);
 char	*ft_strjoin(char const *s1, char const *s2);
 void	ft_mysleep(int sleep);

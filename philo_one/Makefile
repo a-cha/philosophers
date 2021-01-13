@@ -26,11 +26,11 @@ LINK_LIB := -L$(UTILS_DIR) -lutils
 # Sources
 NAME := philo_one
 SRC :=						\
-	main.c					\
+	check_die.c				\
 	init_philos.c			\
 	life_cycle.c			\
 	print_status.c			\
-	check_die.c
+	main.c
 
 OBJ := ${SRC:.c=.o}
 O_WITH_DIR := $(addprefix $(OBJ_DIR), $(OBJ))

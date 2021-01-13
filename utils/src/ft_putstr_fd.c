@@ -12,17 +12,20 @@
 
 #include "utils.h"
 
-void	ft_putstr_fd(char *s, int fd)
+void	ft_putstr(char *s)
 {
-	if (fd >= 0 && s)
-		write(fd, s, ft_strlen(s));
+	write(1, s, ft_strlen(s));
 }
+
 int		ft_putstr_str(char *s1, char *s2)
 {
-	int len;
+	int i;
 
-	len = ft_strlen(s2);
+	i = 0;
 	while (*s2)
+	{
 		*s1++ = *s2++;
-	return (len);
+		++i;
+	}
+	return (i);
 }

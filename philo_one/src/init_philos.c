@@ -32,6 +32,7 @@ void					init_philos(int n, t_philo *philos, char **av)
 	while (++i < n)
 	{
 		philos[i].id = i + 1;
+		philos[i].check_die = 0;
 //		philos[i].fork_l = &forks[(i + 1) % n];
 //		philos[i].fork_r = &forks[i];
 		philos[i].fork_l = &forks[philos[i].id % 2 ? i : (i + 1) % n];
