@@ -3,3 +3,5 @@ cmake-build-debug
 .idea
 test.c
 a.out
+philo_one/philo_one
+utils/libutils.a

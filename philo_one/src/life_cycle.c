@@ -6,14 +6,14 @@
 /*   By: sadolph <sadolph@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/21 16:06:13 by sadolph           #+#    #+#             */
-/*   Updated: 2021/01/13 17:43:56 by sadolph          ###   ########.fr       */
+/*   Updated: 2021/01/13 19:10:15 by sadolph          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_one.h"
 #include "utils.h"
+#include "print_status.h"
 
-//static void			take_forks(t_philo *philo);
 static void			eat(t_philo *philo);
 
 void 				*life_cycle(void *data)
@@ -26,8 +26,8 @@ void 				*life_cycle(void *data)
 	pthread_mutex_lock(philo->time);
 	if (gettimeofday(&mark_t, NULL))
 		return (NULL);
-	philo->start_time = mark_t.tv_sec * 1000000 + mark_t.tv_usec;
-	philo->last_eat = philo->start_time;
+	philo->t_start = mark_t.tv_sec * 1000000 + mark_t.tv_usec;
+	philo->last_eat = philo->t_start;
 	pthread_mutex_unlock(philo->time);
 //	pthread_create(thread, NULL, &check_die, data);
 	pthread_detach(*philo->thread);
@@ -44,9 +44,9 @@ void 				*life_cycle(void *data)
 //			pthread_mutex_unlock(philo->satisfied);
 			return (0);
 		}
-		print_status(philo, SLEEPING);
+		print_status(philo->printing, philo->id, philo->t_start, MSG_SLEEPING);
 		ft_mysleep(philo->t_sleep * 1000);
-		print_status(philo, THINKING);
+		print_status(philo->printing, philo->id, philo->t_start, MSG_THINKING);
 //		if (g_check_die)
 //		{
 //			pthread_join(*thread, NULL);
@@ -64,12 +64,12 @@ static void			eat(t_philo *philo)
 //	pthread_mutex_lock(philo->waiter);
 	pthread_mutex_lock(philo->fork_l);
 //	pthread_mutex_lock(philo->id % 2 ? philo->fork_l : philo->fork_r);
-	print_status(philo, TAKE_FORK);
+	print_status(philo->printing, philo->id, philo->t_start, MSG_TAKEN_FORK);
 	pthread_mutex_lock(philo->fork_r);
 //	pthread_mutex_lock(philo->id % 2 ? philo->fork_r : philo->fork_l);
-	print_status(philo, TAKE_FORK);
+	print_status(philo->printing, philo->id, philo->t_start, MSG_TAKEN_FORK);
 //	pthread_mutex_unlock(philo->waiter);
-	print_status(philo, EATING);
+	print_status(philo->printing, philo->id, philo->t_start, MSG_EATING);
 	--philo->eat_times;
 	pthread_mutex_lock(philo->time);
 	if (gettimeofday(&mark_t, NULL))

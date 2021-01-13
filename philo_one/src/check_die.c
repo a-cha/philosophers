@@ -6,14 +6,14 @@
 /*   By: sadolph <sadolph@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 18:56:46 by sadolph           #+#    #+#             */
-/*   Updated: 2021/01/13 17:26:36 by sadolph          ###   ########.fr       */
+/*   Updated: 2021/01/13 19:10:15 by sadolph          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_one.h"
+#include "print_status.h"
 
-/*
-void				*check_die(void *data)
+void				*check_die_each(void *data)
 {
 	struct timeval	mark_t;
 	t_philo			*philo;
@@ -30,10 +30,9 @@ void				*check_die(void *data)
 			return (0);
 		current = mark_t.tv_sec * 1000000 + mark_t.tv_usec;
 	}
-	print_status(philo, DIED);
+	print_status(philo->printing, philo->id, philo->t_start, MSG_DIED);
 	return (0);
 }
-*/
 
 void				*check_die(void *data)
 {
@@ -62,7 +61,7 @@ void				*check_die(void *data)
 			}
 			else
 			{
-				print_status(&philo[i], DIED);
+				print_status(philo[i].printing, philo[i].id, philo[i].t_start, MSG_DIED);
 				pthread_mutex_lock(philo->printing);
 				return (0);
 			}

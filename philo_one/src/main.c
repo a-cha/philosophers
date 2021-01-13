@@ -6,7 +6,7 @@
 /*   By: sadolph <sadolph@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/21 15:45:35 by sadolph           #+#    #+#             */
-/*   Updated: 2021/01/13 17:26:36 by sadolph          ###   ########.fr       */
+/*   Updated: 2021/01/13 21:35:23 by sadolph          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,14 @@ int						main(int ac, char **av)
 	pthread_t			threads[av[1] ? ft_atoi(av[1]) : 0];
 //	pthread_t			thread_die[av[1] ? ft_atoi(av[1]) : 0];
 	pthread_t			thread_die[1];
+	int 				ret;
 
 	if (ac < 5 || ac > 6 || (ac == 5 && ft_atoi(av[4]) == 0))
 		return (-1);
 //	g_is_satisfied = 0;
 	g_n_philos = ft_atoi(av[1]);
-	init_philos(g_n_philos, philos, av);
+	if ((ret = init_philos(g_n_philos, philos, av)))
+		return (ret);
 	i = -1;
 	while (++i < g_n_philos)
 		philos[i].thread = &threads[i];
