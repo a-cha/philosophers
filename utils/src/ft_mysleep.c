@@ -6,7 +6,7 @@
 /*   By: sadolph <sadolph@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/21 20:10:03 by sadolph           #+#    #+#             */
-/*   Updated: 2021/01/13 16:46:20 by sadolph          ###   ########.fr       */
+/*   Updated: 2021/01/14 13:51:15 by sadolph          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ void	ft_mysleep(int sleep)
 	current = 0;
 	while (current < finish)
 	{
-		usleep(20);
+		if ((usleep(20)))
+			return ;
 		if (gettimeofday(&mark_t, NULL))
 			return ;
 		current = (size_t)(mark_t.tv_sec * 1000000 + mark_t.tv_usec);

@@ -6,14 +6,15 @@
 /*   By: sadolph <sadolph@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 18:56:46 by sadolph           #+#    #+#             */
-/*   Updated: 2021/01/13 19:10:15 by sadolph          ###   ########.fr       */
+/*   Updated: 2021/01/14 13:39:49 by sadolph          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_one.h"
 #include "print_status.h"
 
-void				*check_die_each(void *data)
+/*
+void				*check_die_each_main(void *data)
 {
 	struct timeval	mark_t;
 	t_philo			*philo;
@@ -33,7 +34,31 @@ void				*check_die_each(void *data)
 	print_status(philo->printing, philo->id, philo->t_start, MSG_DIED);
 	return (0);
 }
+*/
 
+void				*check_die_each(void *data)
+{
+	struct timeval	mark_t;
+	t_philo			*philo;
+	int 			current;
+
+	philo = data;
+	current = 0;
+	while (current < (int)(philo->last_eat + philo->table->die * 1000))
+	{
+		if (g_check_die)
+			return (NULL);
+		usleep(10);
+		if (gettimeofday(&mark_t, NULL))
+			return (NULL);
+		current = (int)(mark_t.tv_sec * 1000000 + mark_t.tv_usec);
+	}
+	g_check_die = 1;
+	print_status(philo->id, philo->table->start, MSG_DIED);
+	return (0);
+}
+
+/*
 void				*check_die(void *data)
 {
 	struct timeval	mark_t;
@@ -68,3 +93,4 @@ void				*check_die(void *data)
 		}
 	}
 }
+*/

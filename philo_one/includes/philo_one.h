@@ -57,5 +57,7 @@ typedef struct		s_philo
 int 				init_philos(int n, t_philo *philos, char **av);
 void				*life_cycle(void *data);
 void			 	*check_die(void *data);
+void				*check_die_each(void *data);
+void				*check_die_each_main(void *data);
 
 #endif

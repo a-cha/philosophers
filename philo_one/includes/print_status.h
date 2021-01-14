@@ -19,7 +19,6 @@
 # define MSG_SLEEPING " is sleeping\n"
 # define MSG_DIED "\033[31m is died\033[0m\n"
 
-void				print_status(pthread_mutex_t *printing, int id,
-								 long start_time, char *msg);
+void				print_status(int id, long start_time, char *msg);
 
 #endif //PRINT_STATUS_H
