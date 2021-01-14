@@ -6,7 +6,7 @@
 /*   By: sadolph <sadolph@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/21 15:45:38 by sadolph           #+#    #+#             */
-/*   Updated: 2021/01/13 22:39:33 by sadolph          ###   ########.fr       */
+/*   Updated: 2021/01/14 18:52:08 by sadolph          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,12 @@ typedef struct		s_table
 typedef struct		s_philo
 {
 	int				id;
-	int				eat_times;
+	long 			last_eat;
 	t_table			*table;
 	pthread_mutex_t	*fork_l;
 	pthread_mutex_t	*fork_r;
-	long			last_eat;
 	pthread_t		*thread;
+	int				eat_times;
 	int 			check_die;
 }					t_philo;
 

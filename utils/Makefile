@@ -6,7 +6,7 @@
 #    By: sadolph <sadolph@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/21 22:19:19 by sadolph           #+#    #+#              #
-#    Updated: 2021/01/14 15:50:39 by sadolph          ###   ########.fr        #
+#    Updated: 2021/01/14 16:21:32 by sadolph          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,8 +25,7 @@ NAME := libutils.a
 SRC :=						\
 	ft_atoi.c				\
 	ft_mysleep.c			\
-	ft_strlen.c				\
-	print_status.c
+	ft_print_status.c		\
 
 OBJ := ${SRC:.c=.o}
 O_WITH_DIR := $(addprefix $(OBJ_DIR), $(OBJ))

@@ -6,11 +6,12 @@
 /*   By: sadolph <sadolph@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 18:08:59 by sadolph           #+#    #+#             */
-/*   Updated: 2021/01/14 13:20:48 by sadolph          ###   ########.fr       */
+/*   Updated: 2021/01/14 19:38:00 by sadolph          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo_one.h"
+# include <unistd.h>
+# include <sys/time.h>
 
 int		ft_putstr_str(char *s1, char *s2)
 {
@@ -50,15 +51,13 @@ void				ft_print_status(int id, long start_time, char *msg)
 	char 			status[30];
 	int 			i;
 
-//	pthread_mutex_lock(printing);
 	if (gettimeofday(&mark_t, NULL))
 		return ;
-	i = ft_putnbr_str((int)((mark_t.tv_sec * 1000 + mark_t.tv_usec / 1000)
-							- start_time / 1000), status);
+	i = ft_putnbr_str((int)mark_t.tv_sec * 1000 + mark_t.tv_usec / 1000
+							- (int)start_time / 1000, status);
 	status[i++] = ' ';
 	i += ft_putnbr_str(id, status + i);
 	i += ft_putstr_str(status + i, msg);
 	status[i] = '\0';
 	write(1, status, i);
-//	pthread_mutex_unlock(printing);
 }

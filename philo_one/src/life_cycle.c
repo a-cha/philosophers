@@ -6,7 +6,7 @@
 /*   By: sadolph <sadolph@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/21 16:06:13 by sadolph           #+#    #+#             */
-/*   Updated: 2021/01/14 16:09:31 by sadolph          ###   ########.fr       */
+/*   Updated: 2021/01/14 18:52:08 by sadolph          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,23 @@ static int			eat(t_philo *philo);
 
 void 				*life_cycle(void *data)
 {
-	struct timeval	mark_t;
 	t_philo			*philo;
-	pthread_t		thread[1];
+//	pthread_t		thread[1];
+	struct timeval		mark_t;
 
 	philo = (t_philo *)data;
-	if ((pthread_create(thread, NULL, &check_die_each, data)))
-		return (NULL);
-	philo->last_eat = philo->table->start;
-//	if ((pthread_detach(*philo->thread)))
+//	if ((pthread_create(thread, NULL, &check_die_each, data)))
 //		return (NULL);
-//	g_check_die = 1;
+	if ((pthread_detach(*philo->thread)))
+		return (NULL);
+	if (gettimeofday(&mark_t, NULL))
+		return (NULL);
+	philo->table->start = (int)mark_t.tv_sec * 1000000 + mark_t.tv_usec;
+	philo->last_eat = philo->table->start;
+	g_check_die = 1;
 //	philo->check_die = 1;
-	while (!g_check_die)
+//	while (!g_check_die)
+	while (1)
 	{
 //		take_forks(philo);
 		if (eat(philo))
@@ -45,7 +49,7 @@ void 				*life_cycle(void *data)
 		ft_print_status(philo->id, philo->table->start, MSG_SLEEPING);
 //		if (g_check_die)
 //			break ;
-		ft_mysleep(philo->table->sleep * 1000);
+		ft_mysleep(philo->table->sleep);
 		ft_print_status(philo->id, philo->table->start, MSG_THINKING);
 //		if (g_check_die)
 //			break ;
@@ -73,12 +77,12 @@ static int			eat(t_philo *philo)
 //	pthread_mutex_lock(philo->table->time);
 	if (gettimeofday(&mark_t, NULL))
 		return (ERR_GETTIME);
-	philo->last_eat = mark_t.tv_sec * 1000000 + mark_t.tv_usec;
+	philo->last_eat = (int)mark_t.tv_sec * 1000000 + mark_t.tv_usec;
 //	pthread_mutex_unlock(philo->table->time);
-	ft_mysleep(philo->table->eat * 1000);
-	pthread_mutex_unlock(philo->fork_r);
-//	pthread_mutex_unlock(philo->id % 2 ? philo->fork_l : philo->fork_r);
+	ft_mysleep(philo->table->eat);
 	pthread_mutex_unlock(philo->fork_l);
 //	pthread_mutex_unlock(philo->id % 2 ? philo->fork_r : philo->fork_l);
+	pthread_mutex_unlock(philo->fork_r);
+//	pthread_mutex_unlock(philo->id % 2 ? philo->fork_l : philo->fork_r);
 	return (0);
 }

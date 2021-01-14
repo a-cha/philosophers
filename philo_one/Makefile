@@ -29,7 +29,6 @@ SRC :=						\
 	check_die.c				\
 	init_philos.c			\
 	life_cycle.c			\
-	print_status.c			\
 	main.c
 
 OBJ := ${SRC:.c=.o}
@@ -42,7 +41,7 @@ $(NAME): $(O_WITH_DIR)
 	@echo "\033[32m$(NAME)\033[0m successfully created" ✅
 
 #TODO Выставить зависимости от хэдэров
-$(OBJ_DIR)%.o: $(SRC_DIR)%.c
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c includes/philo_one.h ../utils/includes/utils.h ../utils/includes/ft_print_status.h
 	@mkdir -p $(OBJ_DIR)
 	$(CC) $(CFLAGS) $(LINK_INC) -c $< -o $@
 
