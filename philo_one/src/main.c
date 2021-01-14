@@ -6,7 +6,7 @@
 /*   By: sadolph <sadolph@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/21 15:45:35 by sadolph           #+#    #+#             */
-/*   Updated: 2021/01/14 15:50:39 by sadolph          ###   ########.fr       */
+/*   Updated: 2021/01/14 16:09:31 by sadolph          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int						main(int ac, char **av)
 	t_philo				philos[av[1] ? ft_atoi(av[1]) : 0];
 	pthread_t			threads[av[1] ? ft_atoi(av[1]) : 0];
 //	pthread_t			thread_die[av[1] ? ft_atoi(av[1]) : 0];
-//	pthread_t			thread_die[1];
+	pthread_t			thread_die[1];
 	int 				ret;
 	struct timeval		mark_t;
 
@@ -54,12 +54,12 @@ int						main(int ac, char **av)
 
 ////	thread for each philo to die creates into philos
 	g_check_die = 0;
+	pthread_create(thread_die, NULL, &check_die, &philos);
 	i = -1;
 	while (++i < g_n_philos)
 		pthread_create(&threads[i], NULL, &life_cycle, &philos[i]);
 	i = -1;
-	while (++i < g_n_philos)
-		pthread_join(threads[i], NULL);
+	pthread_join(*thread_die, NULL);
 
 	pthread_mutex_destroy(philos[0].table->print);
 	pthread_mutex_destroy(philos[0].table->time);
