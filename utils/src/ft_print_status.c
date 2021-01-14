@@ -44,7 +44,7 @@ int			ft_putnbr_str(int n, char *str)
 	return (ret);
 }
 
-void				print_status(int id, long start_time, char *msg)
+void				ft_print_status(int id, long start_time, char *msg)
 {
 	struct timeval	mark_t;
 	char 			status[30];

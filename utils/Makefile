@@ -6,7 +6,7 @@
 #    By: sadolph <sadolph@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/21 22:19:19 by sadolph           #+#    #+#              #
-#    Updated: 2021/01/12 00:15:20 by sadolph          ###   ########.fr        #
+#    Updated: 2021/01/14 15:50:39 by sadolph          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,12 +23,10 @@ LINK_INC := $(addprefix -I, $(INC_DIR))
 # Sources
 NAME := libutils.a
 SRC :=						\
-	ft_itoa.c				\
 	ft_atoi.c				\
+	ft_mysleep.c			\
 	ft_strlen.c				\
-	ft_putstr_fd.c			\
-	ft_putnbr_fd.c			\
-	ft_mysleep.c
+	print_status.c
 
 OBJ := ${SRC:.c=.o}
 O_WITH_DIR := $(addprefix $(OBJ_DIR), $(OBJ))
