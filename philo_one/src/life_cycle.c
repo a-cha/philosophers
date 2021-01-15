@@ -29,7 +29,7 @@ void 				*life_cycle(void *data)
 		return (NULL);
 	if (gettimeofday(&mark_t, NULL))
 		return (NULL);
-	philo->table->start = (int)mark_t.tv_sec * 1000000 + mark_t.tv_usec;
+	philo->table->start = mark_t.tv_sec * 1000000 + mark_t.tv_usec;
 	philo->last_eat = philo->table->start;
 	g_check_die = 1;
 //	philo->check_die = 1;
@@ -77,7 +77,7 @@ static int			eat(t_philo *philo)
 //	pthread_mutex_lock(philo->table->time);
 	if (gettimeofday(&mark_t, NULL))
 		return (ERR_GETTIME);
-	philo->last_eat = (int)mark_t.tv_sec * 1000000 + mark_t.tv_usec;
+	philo->last_eat = mark_t.tv_sec * 1000000 + mark_t.tv_usec;
 //	pthread_mutex_unlock(philo->table->time);
 	ft_mysleep(philo->table->eat);
 	pthread_mutex_unlock(philo->fork_l);

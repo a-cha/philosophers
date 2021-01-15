@@ -6,7 +6,7 @@
 /*   By: sadolph <sadolph@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/21 20:10:03 by sadolph           #+#    #+#             */
-/*   Updated: 2021/01/14 18:58:33 by sadolph          ###   ########.fr       */
+/*   Updated: 2021/01/15 15:49:04 by sadolph          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 void				ft_mysleep(int sleep)
 {
 	struct timeval	mark_t;
-	int				finish;
-	int				current;
+	unsigned int	finish;
+	unsigned int	current;
 
 	if (gettimeofday(&mark_t, NULL))
 		return ;
@@ -29,6 +29,6 @@ void				ft_mysleep(int sleep)
 			return ;
 		if (gettimeofday(&mark_t, NULL))
 			return ;
-		current = (int)mark_t.tv_sec * 1000000 + mark_t.tv_usec;
+		current = (unsigned int)mark_t.tv_sec * 1000000 + mark_t.tv_usec;
 	}
 }

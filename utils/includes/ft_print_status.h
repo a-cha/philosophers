@@ -6,7 +6,7 @@
 /*   By: sadolph <sadolph@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 19:20:18 by sadolph           #+#    #+#             */
-/*   Updated: 2021/01/14 18:59:47 by sadolph          ###   ########.fr       */
+/*   Updated: 2021/01/15 16:44:49 by sadolph          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,6 @@
 # define MSG_SLEEPING " is sleeping\n"
 # define MSG_DIED "\033[31m is died\033[0m\n"
 
-void				ft_print_status(int id, long start_time, char *msg);
+void				ft_print_status(int id, unsigned int start_time, char *msg);
 
 #endif //PRINT_STATUS_H

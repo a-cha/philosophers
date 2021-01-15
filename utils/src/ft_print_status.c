@@ -6,16 +6,16 @@
 /*   By: sadolph <sadolph@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 18:08:59 by sadolph           #+#    #+#             */
-/*   Updated: 2021/01/14 19:38:00 by sadolph          ###   ########.fr       */
+/*   Updated: 2021/01/15 16:57:21 by sadolph          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include <unistd.h>
 # include <sys/time.h>
 
-int		ft_putstr_str(char *s1, char *s2)
+static int			ft_putstr_str(char *s1, char *s2)
 {
-	int i;
+	int				i;
 
 	i = 0;
 	while (*s2)
@@ -26,12 +26,14 @@ int		ft_putstr_str(char *s1, char *s2)
 	return (i);
 }
 
-int			ft_putnbr_str(int n, char *str)
+static int			ft_putnbr_str(unsigned int n, char *str)
 {
-	int		num;
-	int 	ret;
-	int 	div;
+	unsigned int	num;
+	int 			ret;
+	int 			div;
 
+	if (n > 1000)
+		n /= 1000;
 	num = n;
 	ret = 1;
 	div = 10;
@@ -45,16 +47,15 @@ int			ft_putnbr_str(int n, char *str)
 	return (ret);
 }
 
-void				ft_print_status(int id, long start_time, char *msg)
+void				ft_print_status(int id, unsigned int start_time, char *msg)
 {
 	struct timeval	mark_t;
-	char 			status[30];
+	char 			status[35];
 	int 			i;
 
 	if (gettimeofday(&mark_t, NULL))
 		return ;
-	i = ft_putnbr_str((int)mark_t.tv_sec * 1000 + mark_t.tv_usec / 1000
-							- (int)start_time / 1000, status);
+	i = ft_putnbr_str(mark_t.tv_sec * 1000000 + mark_t.tv_usec - start_time, status);
 	status[i++] = ' ';
 	i += ft_putnbr_str(id, status + i);
 	i += ft_putstr_str(status + i, msg);

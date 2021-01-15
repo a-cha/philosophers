@@ -6,12 +6,13 @@
 /*   By: sadolph <sadolph@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/21 15:45:35 by sadolph           #+#    #+#             */
-/*   Updated: 2021/01/14 16:35:19 by sadolph          ###   ########.fr       */
+/*   Updated: 2021/01/15 16:57:51 by sadolph          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_one.h"
 #include "utils.h"
+#include "ft_print_status.h"
 
 int						main(int ac, char **av)
 {
