@@ -10,25 +10,20 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include <sys/time.h>
 # include <unistd.h>
+#include "utils.h"
 
 void				ft_mysleep(int sleep)
 {
-	struct timeval	mark_t;
 	unsigned int	finish;
 	unsigned int	current;
 
-	if (gettimeofday(&mark_t, NULL))
-		return ;
-	finish = (int)mark_t.tv_sec * 1000000 + mark_t.tv_usec + sleep * 1000;
+	finish = ft_get_time() + sleep * 1000;
 	current = 0;
 	while (current < finish)
 	{
-		if ((usleep(20)))
+		if ((usleep(50)))
 			return ;
-		if (gettimeofday(&mark_t, NULL))
-			return ;
-		current = (unsigned int)mark_t.tv_sec * 1000000 + mark_t.tv_usec;
+		current = ft_get_time();
 	}
 }

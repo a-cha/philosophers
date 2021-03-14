@@ -37,10 +37,8 @@ int 					init_philos(int n, t_philo *philos, char **av)
 	{
 		philos[i].id = i + 1;
 		philos[i].table = table;
-//		philos[i].fork_l = &forks[philos[i].id % 2 ? i : (i + 1) % n];
-//		philos[i].fork_r = &forks[philos[i].id % 2 ? (i + 1) % n : i];
-		philos[i].fork_l = &forks[(i + 1) % n];
-		philos[i].fork_r = &forks[i];
+		philos[i].fork_r = &forks[(i + 1) % n];
+		philos[i].fork_l = &forks[i];
 		philos[i].eat_times = av[5] ? ft_atoi_cropped(av[5]) : -1;
 		philos[i].check_die = 0;
 	}

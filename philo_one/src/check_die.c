@@ -71,7 +71,7 @@ void				*check_die(void *data)
 				pthread_mutex_lock(philo->table->print);
 				return (0);
 			}
-			usleep(500);
+			usleep(50);
 		}
 	}
 }
