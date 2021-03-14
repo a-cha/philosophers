@@ -18,15 +18,6 @@
 # include <unistd.h>
 # include <pthread.h>
 
-enum	e_errors
-{
-	ERR_MALLOC = -6,
-	ERR_GETTIME,
-	ERR_PTHREAD,
-	ERR_USLEEP,
-	ERR_ARGS
-};
-
 char	g_check_die;
 int 	g_n_philos;
 int 	g_is_satisfied;

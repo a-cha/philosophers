@@ -13,7 +13,8 @@
 #ifndef UTILS_H
 # define UTILS_H
 
-int		ft_atoi(const char *str);
-void	ft_mysleep(int sleep);
+int				ft_atoi_cropped(const char *str);
+void			ft_mysleep(int sleep);
+unsigned int	ft_get_time();
 
 #endif

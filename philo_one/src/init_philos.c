@@ -12,6 +12,7 @@
 
 #include "philo_one.h"
 #include "utils.h"
+#include "errors.h"
 
 static int 				init_table(t_table *table, char **av);
 static int				init_forks(pthread_mutex_t *forks, int n);
@@ -36,11 +37,11 @@ int 					init_philos(int n, t_philo *philos, char **av)
 	{
 		philos[i].id = i + 1;
 		philos[i].table = table;
-		philos[i].fork_l = &forks[philos[i].id % 2 ? i : (i + 1) % n];
-		philos[i].fork_r = &forks[philos[i].id % 2 ? (i + 1) % n : i];
-//		philos[i].fork_l = &forks[(i + 1) % n];
-//		philos[i].fork_r = &forks[i];
-		philos[i].eat_times = av[5] ? ft_atoi(av[5]) : -1;
+//		philos[i].fork_l = &forks[philos[i].id % 2 ? i : (i + 1) % n];
+//		philos[i].fork_r = &forks[philos[i].id % 2 ? (i + 1) % n : i];
+		philos[i].fork_l = &forks[(i + 1) % n];
+		philos[i].fork_r = &forks[i];
+		philos[i].eat_times = av[5] ? ft_atoi_cropped(av[5]) : -1;
 		philos[i].check_die = 0;
 	}
 	return (0);
@@ -56,9 +57,9 @@ static int 				init_table(t_table *table, char **av)
 		return (ret);
 	if ((ret = init_mutex(&table->satisfied)))
 		return (ret);
-	table->die = ft_atoi(av[2]);
-	table->eat = ft_atoi(av[3]);
-	table->sleep = ft_atoi(av[4]);
+	table->die = ft_atoi_cropped(av[2]);
+	table->eat = ft_atoi_cropped(av[3]);
+	table->sleep = ft_atoi_cropped(av[4]);
 	return (0);
 }
 

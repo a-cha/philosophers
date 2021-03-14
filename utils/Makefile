@@ -23,9 +23,10 @@ LINK_INC := $(addprefix -I, $(INC_DIR))
 # Sources
 NAME := libutils.a
 SRC :=						\
-	ft_atoi.c				\
+	ft_atoi_cropped.c		\
 	ft_mysleep.c			\
 	ft_print_status.c		\
+	ft_get_time.c
 
 OBJ := ${SRC:.c=.o}
 O_WITH_DIR := $(addprefix $(OBJ_DIR), $(OBJ))
