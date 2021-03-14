@@ -37,20 +37,20 @@ int						main(int ac, char **av)
 //	philos->table->start = mark_t.tv_sec * 1000000 + mark_t.tv_usec;
 
 ////	one thread to die
-//	i = -1;
-//	while (++i < g_n_philos)
-//		philos[i].thread = &threads[i];
-//	g_check_die = 0;
-//	pthread_create(thread_die, NULL, &check_die, &philos);
-//	i = -1;
-//	while (++i < g_n_philos)
-//		pthread_create(&threads[i], NULL, &life_cycle, &philos[i]);
-//	pthread_join(*thread_die, NULL);
+	i = -1;
+	while (++i < g_n_philos)
+		philos[i].thread = &threads[i];
+	g_check_die = 0;
+	pthread_create(thread_die, NULL, &check_die, &philos);
+	i = -1;
+	while (++i < g_n_philos)
+		pthread_create(&threads[i], NULL, &life_cycle, &philos[i]);
+	pthread_join(*thread_die, NULL);
 
 ////	thread for each philo to die + detached philos
 //	i = -1;
 //	while (++i < g_n_philos)
-//		pthread_create(&threads[i], NULL, &life_cycle, &philos[i]);//	i = -1;
+//		pthread_create(&threads[i], NULL, &life_cycle, &philos[i]);
 //	i = -1;
 //	while (++i < g_n_philos)
 //		pthread_create(&thread_die[i], NULL, &check_die, &philos[i]);
@@ -58,16 +58,13 @@ int						main(int ac, char **av)
 //		pthread_join(thread_die[i], NULL);
 
 ////	thread for each philo to die creates into philos
-	g_check_die = 0;
-	pthread_create(thread_die, NULL, &check_die, &philos);
-	i = -1;
-	while (++i < g_n_philos)
-	{
-		pthread_create(&threads[i], NULL, &life_cycle, &philos[i]);
-//		usleep(100);
-	}
-	i = -1;
-	pthread_join(*thread_die, NULL);
+//	g_check_die = 0;
+//	pthread_create(thread_die, NULL, &check_die, &philos);
+//	i = -1;
+//	while (++i < g_n_philos)
+//		pthread_create(&threads[i], NULL, &life_cycle, &philos[i]);
+//	i = -1;
+//	pthread_join(*thread_die, NULL);
 
 
 

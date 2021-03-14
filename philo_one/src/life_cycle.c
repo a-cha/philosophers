@@ -24,9 +24,9 @@ void 				*life_cycle(void *data)
 	philo->table->start = ft_get_time();
 	philo->last_eat = philo->table->start;
 
-	pthread_t		thread[1];
-	if ((pthread_create(thread, NULL, &check_die_each, data)))
-		return (NULL);
+//	pthread_t		thread[1];
+//	if ((pthread_create(thread, NULL, &check_die_each, data)))
+//		return (NULL);
 //	if ((pthread_detach(*philo->thread)))
 //		return (NULL);
 
