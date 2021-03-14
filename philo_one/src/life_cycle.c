@@ -31,6 +31,8 @@ void 				*life_cycle(void *data)
 //		return (NULL);
 
 	g_check_die = 1;
+	if (philo->id % 2)
+		ft_mysleep(philo->table->eat);
 //	philo->check_die = 1;
 //	while (!g_check_die)
 	while (philo->eat_times != 0)
@@ -61,8 +63,8 @@ void 				*life_cycle(void *data)
 
 static int			eat(t_philo *philo)
 {
-//	pthread_mutex_lock(philo->fork_l);
-	pthread_mutex_lock(philo->id % 2 ? philo->fork_l : philo->fork_r);
+	pthread_mutex_lock(philo->fork_l);
+//	pthread_mutex_lock(philo->id % 2 ? philo->fork_r : philo->fork_l);
 //	pthread_mutex_lock(philo->table->print);
 
 //	if (philo->id != 5)
@@ -74,8 +76,8 @@ static int			eat(t_philo *philo)
 //	pthread_mutex_unlock(philo->table->print);
 //	if (g_check_die)
 //		return (-1);
-//	pthread_mutex_lock(philo->fork_r);
-	pthread_mutex_lock(philo->id % 2 ? philo->fork_r : philo->fork_l);
+	pthread_mutex_lock(philo->fork_r);
+//	pthread_mutex_lock(philo->id % 2 ? philo->fork_l : philo->fork_r);
 
 //	if (philo->id != 5)
 //		pthread_mutex_lock(philo->fork_r);
@@ -96,10 +98,10 @@ static int			eat(t_philo *philo)
 	philo->last_eat = ft_get_time();
 //	pthread_mutex_unlock(philo->table->time);
 	ft_mysleep(philo->table->eat);
-//	pthread_mutex_unlock(philo->fork_r);
-//	pthread_mutex_unlock(philo->fork_l);
-	pthread_mutex_unlock(philo->id % 2 ? philo->fork_r : philo->fork_l);
-	pthread_mutex_unlock(philo->id % 2 ? philo->fork_l : philo->fork_r);
+	pthread_mutex_unlock(philo->fork_l);
+	pthread_mutex_unlock(philo->fork_r);
+//	pthread_mutex_unlock(philo->id % 2 ? philo->fork_l : philo->fork_r);
+//	pthread_mutex_unlock(philo->id % 2 ? philo->fork_r : philo->fork_l);
 
 //	if (philo->id != 5)
 //	{
