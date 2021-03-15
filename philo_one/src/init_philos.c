@@ -14,8 +14,8 @@
 #include "utils.h"
 #include "errors.h"
 
-static int 				init_table(t_table *table, char **av);
-static int				init_forks(pthread_mutex_t *forks, int n);
+static int 				init_table(t_table **table, char **av);
+static int				init_forks(pthread_mutex_t **forks, int n);
 static int				init_mutex(pthread_mutex_t **mutex);
 
 int 					init_philos(int n, t_philo *philos, char **av)
@@ -24,13 +24,9 @@ int 					init_philos(int n, t_philo *philos, char **av)
 	pthread_mutex_t		*forks;
 	int					i;
 
-	if (!(table = malloc(sizeof(t_table))))
-		return (ERR_MALLOC);
-	if ((i = init_table(table, av)))
+	if ((i = init_table(&table, av)))
 		return (i);
-	if (!(forks = malloc(n * sizeof(pthread_mutex_t))))
-		return (ERR_MALLOC);
-	if ((i = init_forks(forks, n)))
+	if ((i = init_forks(&forks, n)))
 		return (i);
 	i = -1;
 	while (++i < n)
@@ -45,30 +41,46 @@ int 					init_philos(int n, t_philo *philos, char **av)
 	return (0);
 }
 
-static int 				init_table(t_table *table, char **av)
+static int 				init_table(t_table **table, char **av)
 {
 	int					ret;
 
-	if ((ret = init_mutex(&table->time)))
+	if (!(*table = malloc(sizeof(t_table))))
+		return (ERR_MALLOC);
+	if ((ret = init_mutex(&(*table)->time)))
+	{
+		free(table);
 		return (ret);
-	if ((ret = init_mutex(&table->print)))
+	}
+	if ((ret = init_mutex(&(*table)->print)))
+	{
+		free(table);
 		return (ret);
-	if ((ret = init_mutex(&table->satisfied)))
+	}
+	if ((ret = init_mutex(&(*table)->satisfied)))
+	{
+		free(table);
 		return (ret);
-	table->die = ft_atoi_cropped(av[2]);
-	table->eat = ft_atoi_cropped(av[3]);
-	table->sleep = ft_atoi_cropped(av[4]);
+	}
+	(*table)->die = ft_atoi_cropped(av[2]);
+	(*table)->eat = ft_atoi_cropped(av[3]);
+	(*table)->sleep = ft_atoi_cropped(av[4]);
 	return (0);
 }
 
-static int				init_forks(pthread_mutex_t *forks, int n)
+static int				init_forks(pthread_mutex_t **forks, int n)
 {
 	int					i;
 
+	if (!(*forks = malloc(n * sizeof(pthread_mutex_t))))
+		return (ERR_MALLOC);
 	i = -1;
 	while (++i < n)
-		if ((pthread_mutex_init(&forks[i], NULL)))
+		if ((pthread_mutex_init(&(*forks)[i], NULL)))
+		{
+			free(*forks);
 			return (ERR_PTHREAD);
+		}
 	return (0);
 }
 
@@ -77,6 +89,9 @@ static int				init_mutex(pthread_mutex_t **mutex)
 	if (!(*mutex = malloc(sizeof(pthread_mutex_t))))
 		return (ERR_MALLOC);
 	if ((pthread_mutex_init(*mutex, NULL)))
+	{
+		free(*mutex);
 		return (ERR_PTHREAD);
+	}
 	return (0);
 }
