@@ -16,14 +16,16 @@
 
 /*
 ** Runs a single thread for each philosopher's life cycle
-** And one more thread to check whether philo isn't dead
+** And one more thread to check whether philo is dead
 */
-void			start_threads(t_philo *philos);
 
-int				main(int ac, char **av)
+int						main(int ac, char **av)
 {
-	t_philo		philos[av[1] ? ft_atoi_cropped(av[1]) : 0];
-	int			ret;
+	int					i;
+	t_philo				philos[av[1] ? ft_atoi_cropped(av[1]) : 0];
+	pthread_t			threads[av[1] ? ft_atoi_cropped(av[1]) : 0];
+	pthread_t			thread_die[1];
+	int					ret;
 
 	if (ac < 5 || ac > 6 || (ac == 5 && ft_atoi_cropped(av[4]) == 0))
 		return (ERR_ARGS);
@@ -31,21 +33,11 @@ int				main(int ac, char **av)
 	g_n_philos = ft_atoi_cropped(av[1]);
 	if ((ret = init_philos(philos, av)))
 		return (ret);
-	start_threads(philos);
-}
-
-void			start_threads(t_philo *philos)
-{
-	int			i;
-	pthread_t	threads[g_n_philos];
-	pthread_t	thread_die[1];
-
 	i = -1;
 	while (++i < g_n_philos)
 		philos[i].thread = &threads[i];
 	g_check_die = 0;
-	if ((i = pthread_create(thread_die, NULL, &check_die, &philos)))
-		ft_safety_exit(i, philos);
+	pthread_create(thread_die, NULL, &check_die, &philos);
 	i = -1;
 	while (++i < g_n_philos)
 		pthread_create(&threads[i], NULL, &life_cycle, &philos[i]);
