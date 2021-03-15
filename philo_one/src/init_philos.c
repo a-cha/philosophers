@@ -18,7 +18,7 @@ static int 				init_table(t_table **table, char **av);
 static int				init_forks(pthread_mutex_t **forks, int n);
 static int				init_mutex(pthread_mutex_t **mutex);
 
-int 					init_philos(int n, t_philo *philos, char **av)
+int init_philos(t_philo *philos, char **av)
 {
 	t_table				*table;
 	pthread_mutex_t		*forks;
@@ -26,14 +26,14 @@ int 					init_philos(int n, t_philo *philos, char **av)
 
 	if ((i = init_table(&table, av)))
 		return (i);
-	if ((i = init_forks(&forks, n)))
+	if ((i = init_forks(&forks, g_n_philos)))
 		return (i);
 	i = -1;
-	while (++i < n)
+	while (++i < g_n_philos)
 	{
 		philos[i].id = i + 1;
 		philos[i].table = table;
-		philos[i].fork_r = &forks[(i + 1) % n];
+		philos[i].fork_r = &forks[(i + 1) % g_n_philos];
 		philos[i].fork_l = &forks[i];
 		philos[i].eat_times = av[5] ? ft_atoi_cropped(av[5]) : -1;
 		philos[i].check_die = 0;
