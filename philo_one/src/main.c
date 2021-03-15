@@ -22,9 +22,6 @@ int						main(int ac, char **av)
 	pthread_t			threads[av[1] ? ft_atoi_cropped(av[1]) : 0];
 	pthread_t			thread_die[1];
 	int 				ret;
-//	int					n_philos;
-//	pthread_t			thread_die[av[1] ? ft_atoi(av[1]) : 0];
-//	struct timeval		mark_t;
 
 	if (ac < 5 || ac > 6 || (ac == 5 && ft_atoi_cropped(av[4]) == 0))
 		return (ERR_ARGS);
@@ -32,9 +29,6 @@ int						main(int ac, char **av)
 	g_n_philos = ft_atoi_cropped(av[1]);
 	if ((ret = init_philos(g_n_philos, philos, av)))
 		return (ret);
-//	if (gettimeofday(&mark_t, NULL))
-//		return (ERR_GETTIME);
-//	philos->table->start = mark_t.tv_sec * 1000000 + mark_t.tv_usec;
 
 ////	one thread to die
 	i = -1;
@@ -47,33 +41,8 @@ int						main(int ac, char **av)
 		pthread_create(&threads[i], NULL, &life_cycle, &philos[i]);
 	pthread_join(*thread_die, NULL);
 
-////	thread for each philo to die + detached philos
-//	i = -1;
-//	while (++i < g_n_philos)
-//		pthread_create(&threads[i], NULL, &life_cycle, &philos[i]);
-//	i = -1;
-//	while (++i < g_n_philos)
-//		pthread_create(&thread_die[i], NULL, &check_die, &philos[i]);
-//	while (++i < g_n_philos)
-//		pthread_join(thread_die[i], NULL);
-
-////	thread for each philo to die creates into philos
-//	g_check_die = 0;
-//	pthread_create(thread_die, NULL, &check_die, &philos);
-//	i = -1;
-//	while (++i < g_n_philos)
-//		pthread_create(&threads[i], NULL, &life_cycle, &philos[i]);
-//	i = -1;
-//	pthread_join(*thread_die, NULL);
+////	clean memory
 
 
-
-
-	pthread_mutex_destroy(philos[0].table->print);
-	pthread_mutex_destroy(philos[0].table->time);
-	pthread_mutex_destroy(philos[0].table->satisfied);
-	i = -1;
-	while (++i < g_n_philos)
-		pthread_mutex_destroy(philos[i].fork_l);
-	return (0);
+	ft_safety_exit(0, philos);
 }

@@ -1,3 +1,4 @@
+#include <__wctype.h>
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -50,7 +51,7 @@ void				ft_print_status(int id, unsigned int start_time, char *msg)
 	char 			status[35];
 	int 			i;
 
-	i = ft_putnbr_str(ft_get_time() - start_time, status);
+	i = ft_putnbr_str(ft_get_time() - start_time * 0, status);
 	status[i++] = ' ';
 	i += ft_putnbr_str(id, status + i);
 	i += ft_putstr_str(status + i, msg);

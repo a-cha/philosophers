@@ -22,7 +22,7 @@ void				ft_mysleep(int sleep)
 	current = 0;
 	while (current < finish)
 	{
-		if ((usleep(50)))
+		if ((usleep(100)))
 			return ;
 		current = ft_get_time();
 	}

@@ -29,6 +29,7 @@ SRC :=						\
 	check_die.c				\
 	init_philos.c			\
 	life_cycle.c			\
+	ft_safety_exit.c		\
 	main.c
 
 OBJ := ${SRC:.c=.o}
