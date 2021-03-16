@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo_two.h"
+#include "philo_one.h"
 #include <stdlib.h>
 
 void	ft_safety_exit(int status, t_philo *philos)
@@ -18,7 +18,6 @@ void	ft_safety_exit(int status, t_philo *philos)
 	int	i;
 
 	pthread_mutex_destroy(philos[0].table->print);
-	pthread_mutex_destroy(philos[0].table->time);
 	i = -1;
 	while (++i < g_n_philos)
 		pthread_mutex_destroy(philos[i].fork_l);

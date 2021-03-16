@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo_two.h"
+#include "philo_one.h"
 #include "init_philos.h"
 #include "utils.h"
 #include "errors.h"
@@ -44,11 +44,6 @@ static int			init_table(t_table **table, char **av)
 
 	if (!(*table = malloc(sizeof(t_table))))
 		return (ERR_MALLOC);
-	if ((ret = init_mutex(&(*table)->time)))
-	{
-		free(table);
-		return (ret);
-	}
 	if ((ret = init_mutex(&(*table)->print)))
 	{
 		free(table);
