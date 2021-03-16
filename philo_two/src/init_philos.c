@@ -44,12 +44,12 @@ static int			init_table(t_table **table, char **av)
 
 	if (!(*table = malloc(sizeof(t_table))))
 		return (ERR_MALLOC);
-	if ((ret = init_mutex(&(*table)->time)))
+	if ((ret = init_sem(&(*table)->time, 0, 0)))
 	{
 		free(table);
 		return (ret);
 	}
-	if ((ret = init_mutex(&(*table)->print)))
+	if ((ret = init_sem(&(*table)->print, 0, 0)))
 	{
 		free(table);
 		return (ret);
@@ -76,14 +76,8 @@ static int			init_forks(pthread_mutex_t **forks, int n)
 	return (0);
 }
 
-static int			init_mutex(pthread_mutex_t **mutex)
+static sem_t		*init_sem(const char *name, int value)
 {
-	if (!(*mutex = malloc(sizeof(pthread_mutex_t))))
-		return (ERR_MALLOC);
-	if ((pthread_mutex_init(*mutex, NULL)))
-	{
-		free(*mutex);
-		return (ERR_PTHREAD);
-	}
-	return (0);
+	sem_unlink(name);
+	return (sem_open(name, value));
 }

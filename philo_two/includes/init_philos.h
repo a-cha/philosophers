@@ -13,8 +13,10 @@
 #ifndef PHILOSOPHERS_INIT_PHILOS_H
 # define PHILOSOPHERS_INIT_PHILOS_H
 
+#include <semaphore.h>
+
 static int			init_table(t_table **table, char **av);
 static int			init_forks(pthread_mutex_t **forks, int n);
-static int			init_mutex(pthread_mutex_t **mutex);
+static sem_t		*init_sem(const char *name, int value);
 
 #endif
