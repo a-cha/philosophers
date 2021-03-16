@@ -66,7 +66,7 @@ static int			init_forks(pthread_mutex_t **forks, int n)
 		if ((pthread_mutex_init(&(*forks)[i], NULL)))
 		{
 			free(*forks);
-			return (ERR_PTHREAD);
+			return (ERR_MUTEX);
 		}
 	return (0);
 }
@@ -78,7 +78,7 @@ static int			init_mutex(pthread_mutex_t **mutex)
 	if ((pthread_mutex_init(*mutex, NULL)))
 	{
 		free(*mutex);
-		return (ERR_PTHREAD);
+		return (ERR_MUTEX);
 	}
 	return (0);
 }

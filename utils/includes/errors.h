@@ -15,10 +15,11 @@
 
 enum	e_errors
 {
-	ERR_MALLOC = -6,
+	ERR_MALLOC = -7,
 	ERR_GETTIME,
 	ERR_PTHREAD,
-	ERR_USLEEP,
+	ERR_MUTEX,
+	ERR_SEMAPHORE,
 	ERR_ARGS
 };
 
