@@ -31,32 +31,34 @@ void				*life_cycle(void *data)
 			++g_is_satisfied;
 			break ;
 		}
-		pthread_mutex_lock(philo->table->print);
+		sem_wait(philo->table->print);
 		ft_print_status(philo->id, philo->table->start, MSG_SLEEPING);
-		pthread_mutex_unlock(philo->table->print);
+		sem_post(philo->table->print);
 		ft_mysleep(philo->table->sleep);
-		pthread_mutex_lock(philo->table->print);
+		sem_wait(philo->table->print);
 		ft_print_status(philo->id, philo->table->start, MSG_THINKING);
-		pthread_mutex_unlock(philo->table->print);
+		sem_post(philo->table->print);
 	}
 	return (NULL);
 }
 
 int					eat(t_philo *philo)
 {
-	pthread_mutex_lock(philo->fork_l);
-	pthread_mutex_lock(philo->table->print);
+	sem_wait(philo->table->waiter);
+	sem_wait(philo->table->forks);
+	sem_wait(philo->table->print);
 	ft_print_status(philo->id, philo->table->start, MSG_TAKEN_FORK);
-	pthread_mutex_unlock(philo->table->print);
-	pthread_mutex_lock(philo->fork_r);
-	pthread_mutex_lock(philo->table->print);
+	sem_post(philo->table->print);
+	sem_wait(philo->table->forks);
+	sem_wait(philo->table->print);
 	ft_print_status(philo->id, philo->table->start, MSG_TAKEN_FORK);
 	ft_print_status(philo->id, philo->table->start, MSG_EATING);
-	pthread_mutex_unlock(philo->table->print);
+	sem_post(philo->table->print);
 	--philo->eat_times;
 	philo->last_eat = ft_get_time();
 	ft_mysleep(philo->table->eat);
-	pthread_mutex_unlock(philo->fork_l);
-	pthread_mutex_unlock(philo->fork_r);
+	sem_post(philo->table->forks);
+	sem_post(philo->table->forks);
+	sem_post(philo->table->waiter);
 	return (0);
 }

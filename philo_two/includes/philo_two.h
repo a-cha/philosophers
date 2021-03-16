@@ -10,10 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_ONE_H
-# define PHILO_ONE_H
+#ifndef PHILO_TWO_H
+# define PHILO_TWO_H
 
 # include <pthread.h>
+# include <semaphore.h>
+
+# define SEM_FORKS "forks_sem"
+# define SEM_PRINT "print_sem"
+# define SEM_WAITER "waiter_sem"
 
 int					g_n_philos;
 int					g_is_satisfied;
@@ -24,8 +29,9 @@ typedef struct		s_table
 	int				eat;
 	int				sleep;
 	long			start;
-	pthread_mutex_t	*print;
-	pthread_mutex_t	*time;
+	sem_t			*forks;
+	sem_t			*print;
+	sem_t			*waiter;
 }					t_table;
 
 typedef struct		s_philo
@@ -33,8 +39,6 @@ typedef struct		s_philo
 	int				id;
 	long			last_eat;
 	t_table			*table;
-	pthread_mutex_t	*fork_l;
-	pthread_mutex_t	*fork_r;
 	pthread_t		*thread;
 	int				eat_times;
 }					t_philo;

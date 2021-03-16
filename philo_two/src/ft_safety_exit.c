@@ -15,12 +15,11 @@
 
 void	ft_safety_exit(int status, t_philo *philos)
 {
-	int	i;
-
-	pthread_mutex_destroy(philos[0].table->print);
-	pthread_mutex_destroy(philos[0].table->time);
-	i = -1;
-	while (++i < g_n_philos)
-		pthread_mutex_destroy(philos[i].fork_l);
+	sem_unlink(SEM_FORKS);
+	sem_unlink(SEM_PRINT);
+	sem_unlink(SEM_WAITER);
+	sem_close(philos[0].table->forks);
+	sem_close(philos[0].table->print);
+	sem_close(philos[0].table->waiter);
 	exit(status);
 }

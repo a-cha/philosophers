@@ -24,7 +24,7 @@ LINK_INC := $(addprefix -I, $(INC_DIR))
 LINK_LIB := -L$(UTILS_DIR) -lutils
 
 # Sources
-NAME := philo_one
+NAME := philo_two
 SRC :=						\
 	check_die.c				\
 	init_philos.c			\

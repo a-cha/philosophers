@@ -30,13 +30,13 @@ void			*check_die(void *data)
 		{
 			if (g_is_satisfied == g_n_philos)
 			{
-				pthread_mutex_lock(philo->table->print);
+				sem_wait(philo->table->print);
 				return (0);
 			}
 			usleep(100);
 			if (philo[i].last_eat + t_to_die < ft_get_time())
 			{
-				pthread_mutex_lock(philo->table->print);
+				sem_wait(philo->table->print);
 				ft_print_status(philo[i].id, philo[i].table->start, MSG_DIED);
 				return (0);
 			}
