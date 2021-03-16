@@ -29,7 +29,6 @@ typedef struct		s_table
 	long			start;
 	pthread_mutex_t	*print;
 	pthread_mutex_t	*time;
-	pthread_mutex_t	*satisfied;
 }					t_table;
 
 typedef struct		s_philo

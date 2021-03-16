@@ -54,11 +54,6 @@ static int			init_table(t_table **table, char **av)
 		free(table);
 		return (ret);
 	}
-	if ((ret = init_mutex(&(*table)->satisfied)))
-	{
-		free(table);
-		return (ret);
-	}
 	(*table)->die = ft_atoi(av[2]);
 	(*table)->eat = ft_atoi(av[3]);
 	(*table)->sleep = ft_atoi(av[4]);
