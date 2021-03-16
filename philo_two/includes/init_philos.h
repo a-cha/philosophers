@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #ifndef PHILOSOPHERS_INIT_PHILOS_H
-#define PHILOSOPHERS_INIT_PHILOS_H
+# define PHILOSOPHERS_INIT_PHILOS_H
 
 static int			init_table(t_table **table, char **av);
 static int			init_forks(pthread_mutex_t **forks, int n);

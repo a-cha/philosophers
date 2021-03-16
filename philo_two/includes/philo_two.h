@@ -13,9 +13,6 @@
 #ifndef PHILO_ONE_H
 # define PHILO_ONE_H
 
-# include <sys/time.h>
-# include <stdlib.h>
-# include <unistd.h>
 # include <pthread.h>
 
 int					g_n_philos;
@@ -29,7 +26,6 @@ typedef struct		s_table
 	long			start;
 	pthread_mutex_t	*print;
 	pthread_mutex_t	*time;
-	pthread_mutex_t	*satisfied;
 }					t_table;
 
 typedef struct		s_philo
@@ -41,7 +37,6 @@ typedef struct		s_philo
 	pthread_mutex_t	*fork_r;
 	pthread_t		*thread;
 	int				eat_times;
-	int				check_die;
 }					t_philo;
 
 int					init_philos(t_philo *philos, char **av);
