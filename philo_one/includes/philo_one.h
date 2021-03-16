@@ -13,9 +13,6 @@
 #ifndef PHILO_ONE_H
 # define PHILO_ONE_H
 
-# include <sys/time.h>
-# include <stdlib.h>
-# include <unistd.h>
 # include <pthread.h>
 
 int					g_n_philos;

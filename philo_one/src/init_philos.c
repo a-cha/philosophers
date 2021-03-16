@@ -14,6 +14,7 @@
 #include "init_philos.h"
 #include "utils.h"
 #include "errors.h"
+#include <stdlib.h>
 
 int					init_philos(t_philo *philos, char **av)
 {

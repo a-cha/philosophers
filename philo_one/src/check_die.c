@@ -13,6 +13,7 @@
 #include "philo_one.h"
 #include "ft_print_status.h"
 #include "utils.h"
+#include <unistd.h>
 
 void			*check_die(void *data)
 {

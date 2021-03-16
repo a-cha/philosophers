@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "philo_one.h"
+#include <stdlib.h>
 
 void	ft_safety_exit(int status, t_philo *philos)
 {
