@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo_one.h"
+#include "philo_two.h"
 #include "ft_print_status.h"
 #include "utils.h"
 #include <unistd.h>

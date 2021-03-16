@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo_one.h"
+#include "philo_two.h"
 #include <stdlib.h>
 
 void	ft_safety_exit(int status, t_philo *philos)
