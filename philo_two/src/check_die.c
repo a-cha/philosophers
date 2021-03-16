@@ -18,7 +18,7 @@ void			*check_die(void *data)
 {
 	t_philo		*philo;
 	int			t_to_die;
-	int 		i;
+	int			i;
 
 	philo = data;
 	t_to_die = philo[0].table->die * 1000;
