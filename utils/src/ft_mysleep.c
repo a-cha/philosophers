@@ -13,10 +13,10 @@
 # include <unistd.h>
 #include "utils.h"
 
-void				ft_mysleep(int sleep)
+void		ft_mysleep(int sleep)
 {
-	unsigned int	finish;
-	unsigned int	current;
+	long	finish;
+	long	current;
 
 	finish = ft_get_time() + sleep * 1000;
 	current = 0;

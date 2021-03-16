@@ -14,9 +14,9 @@
 # include <unistd.h>
 #include "utils.h"
 
-static int			ft_putstr_str(char *s1, char *s2)
+static int	ft_putstr_str(char *s1, char *s2)
 {
-	int				i;
+	int		i;
 
 	i = 0;
 	while (*s2)
@@ -27,11 +27,11 @@ static int			ft_putstr_str(char *s1, char *s2)
 	return (i);
 }
 
-static int			ft_putnbr_str(unsigned int n, char *str)
+static int	ft_putnbr_str(long n, char *str)
 {
-	unsigned int	num;
-	int 			len;
-	int 			div;
+	long	num;
+	int 	len;
+	int 	div;
 
 	num = n;
 	len = 1;
@@ -46,12 +46,12 @@ static int			ft_putnbr_str(unsigned int n, char *str)
 	return (len);
 }
 
-void				ft_print_status(int id, unsigned int start_time, char *msg)
+void		ft_print_status(int id, long start_time, char *msg)
 {
-	char 			status[35];
-	int 			i;
+	char	status[40];
+	int 	i;
 
-	i = ft_putnbr_str(ft_get_time() - start_time, status);
+	i = ft_putnbr_str((ft_get_time() - start_time) / 1000, status);
 	status[i++] = ' ';
 	i += ft_putnbr_str(id, status + i);
 	i += ft_putstr_str(status + i, msg);

@@ -18,7 +18,6 @@
 # include <unistd.h>
 # include <pthread.h>
 
-char	g_check_die;
 int 	g_n_philos;
 int 	g_is_satisfied;
 
@@ -27,7 +26,7 @@ typedef struct		s_table
 	int				die;
 	int				eat;
 	int				sleep;
-	unsigned int	start;
+	long			start;
 	pthread_mutex_t	*print;
 	pthread_mutex_t	*time;
 	pthread_mutex_t	*satisfied;
@@ -36,7 +35,7 @@ typedef struct		s_table
 typedef struct		s_philo
 {
 	int				id;
-	unsigned int	last_eat;
+	long			last_eat;
 	t_table			*table;
 	pthread_mutex_t	*fork_l;
 	pthread_mutex_t	*fork_r;

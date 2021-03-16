@@ -36,7 +36,6 @@ int						main(int ac, char **av)
 	i = -1;
 	while (++i < g_n_philos)
 		philos[i].thread = &threads[i];
-	g_check_die = 0;
 	pthread_create(thread_die, NULL, &check_die, &philos);
 	i = -1;
 	while (++i < g_n_philos)

@@ -19,6 +19,6 @@
 # define MSG_SLEEPING " is sleeping\n"
 # define MSG_DIED "\033[31m is died\033[0m\n"
 
-void				ft_print_status(int id, __unused unsigned int start_time, char *msg);
+void	ft_print_status(int id, __unused long start_time, char *msg);
 
 #endif //PRINT_STATUS_H

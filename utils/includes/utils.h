@@ -15,6 +15,6 @@
 
 int				ft_atoi_cropped(const char *str);
 void			ft_mysleep(int sleep);
-unsigned int	ft_get_time();
+long			ft_get_time();
 
 #endif
