@@ -22,15 +22,15 @@
 int						main(int ac, char **av)
 {
 	int					i;
-	t_philo				philos[av[1] ? ft_atoi_cropped(av[1]) : 0];
-	pthread_t			threads[av[1] ? ft_atoi_cropped(av[1]) : 0];
+	t_philo				philos[av[1] ? ft_atoi(av[1]) : 0];
+	pthread_t			threads[av[1] ? ft_atoi(av[1]) : 0];
 	pthread_t			thread_die[1];
 	int					ret;
 
-	if (ac < 5 || ac > 6 || (ac == 5 && ft_atoi_cropped(av[4]) == 0))
+	if (ac < 5 || ac > 6 || (ac == 5 && ft_atoi(av[4]) == 0))
 		return (ERR_ARGS);
 //	g_is_satisfied = 0;
-	g_n_philos = ft_atoi_cropped(av[1]);
+	g_n_philos = ft_atoi(av[1]);
 	if ((ret = init_philos(philos, av)))
 		return (ret);
 	i = -1;

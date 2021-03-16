@@ -14,11 +14,11 @@
 #include "ft_print_status.h"
 #include "utils.h"
 
-void				*check_die(void *data)
+void			*check_die(void *data)
 {
-	t_philo			*philo;
-	unsigned int	t_to_die;
-	int 			i;
+	t_philo		*philo;
+	int			t_to_die;
+	int 		i;
 
 	philo = data;
 	t_to_die = philo[0].table->die * 1000;

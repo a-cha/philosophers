@@ -23,7 +23,7 @@ LINK_INC := $(addprefix -I, $(INC_DIR))
 # Sources
 NAME := libutils.a
 SRC :=						\
-	ft_atoi_cropped.c		\
+	ft_atoi.c				\
 	ft_mysleep.c			\
 	ft_print_status.c		\
 	ft_get_time.c
