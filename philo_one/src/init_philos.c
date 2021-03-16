@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "philo_one.h"
+#include "init_philos.h"
 #include "utils.h"
 #include "errors.h"
 

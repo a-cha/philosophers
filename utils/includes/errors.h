@@ -1,9 +1,17 @@
-//
-// Created by Skipjack Adolph on 3/14/21.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   errors.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sadolph <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/16 14:25:37 by sadolph           #+#    #+#             */
+/*   Updated: 2021/03/16 14:25:41 by sadolph          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef PHILOSOPHERS_ERRORS_H
-#define PHILOSOPHERS_ERRORS_H
+# define PHILOSOPHERS_ERRORS_H
 
 enum	e_errors
 {
@@ -14,4 +22,4 @@ enum	e_errors
 	ERR_ARGS
 };
 
-#endif //PHILOSOPHERS_ERRORS_H
+#endif

@@ -1,4 +1,3 @@
-#include <__wctype.h>
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -7,11 +6,11 @@
 /*   By: sadolph <sadolph@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 18:08:59 by sadolph           #+#    #+#             */
-/*   Updated: 2021/01/15 17:36:54 by sadolph          ###   ########.fr       */
+/*   Updated: 2021/03/16 14:42:00 by sadolph          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include <unistd.h>
+#include <unistd.h>
 #include "utils.h"
 
 static int	ft_putstr_str(char *s1, char *s2)
@@ -30,8 +29,8 @@ static int	ft_putstr_str(char *s1, char *s2)
 static int	ft_putnbr_str(long n, char *str)
 {
 	long	num;
-	int 	len;
-	int 	div;
+	int		len;
+	int		div;
 
 	num = n;
 	len = 1;
@@ -49,7 +48,7 @@ static int	ft_putnbr_str(long n, char *str)
 void		ft_print_status(int id, long start_time, char *msg)
 {
 	char	status[40];
-	int 	i;
+	int		i;
 
 	i = ft_putnbr_str((ft_get_time() - start_time) / 1000, status);
 	status[i++] = ' ';

@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRINT_STATUS_H
-# define PRINT_STATUS_H
+#ifndef PHILOSOPHERS_FT_PRINT_STATUS_H
+# define PHILOSOPHERS_FT_PRINT_STATUS_H
 
 # define MSG_TAKEN_FORK " has taken a fork\n"
 # define MSG_EATING "\e[0;32m is eating\033[0m\n"
@@ -19,6 +19,6 @@
 # define MSG_SLEEPING " is sleeping\n"
 # define MSG_DIED "\033[31m is died\033[0m\n"
 
-void	ft_print_status(int id, __unused long start_time, char *msg);
+void	ft_print_status(int id, long start_time, char *msg);
 
-#endif //PRINT_STATUS_H
+#endif

@@ -42,7 +42,7 @@ void				*life_cycle(void *data)
 	return (NULL);
 }
 
-static int			eat(t_philo *philo)
+int					eat(t_philo *philo)
 {
 	pthread_mutex_lock(philo->fork_l);
 	pthread_mutex_lock(philo->table->print);

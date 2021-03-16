@@ -45,12 +45,8 @@ typedef struct		s_philo
 }					t_philo;
 
 int					init_philos(t_philo *philos, char **av);
-static int			init_table(t_table **table, char **av);
-static int			init_forks(pthread_mutex_t **forks, int n);
-static int			init_mutex(pthread_mutex_t **mutex);
-
 void				*life_cycle(void *data);
-static int			eat(t_philo *philo);
+int					eat(t_philo *philo);
 void				*check_die(void *data);
 void				ft_safety_exit(int status, t_philo *philos);
 
