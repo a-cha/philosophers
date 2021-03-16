@@ -14,15 +14,11 @@
 #include "utils.h"
 #include "errors.h"
 
-static int 				init_table(t_table **table, char **av);
-static int				init_forks(pthread_mutex_t **forks, int n);
-static int				init_mutex(pthread_mutex_t **mutex);
-
-int init_philos(t_philo *philos, char **av)
+int					init_philos(t_philo *philos, char **av)
 {
-	t_table				*table;
-	pthread_mutex_t		*forks;
-	int					i;
+	t_table			*table;
+	pthread_mutex_t	*forks;
+	int				i;
 
 	if ((i = init_table(&table, av)))
 		return (i);
@@ -41,9 +37,9 @@ int init_philos(t_philo *philos, char **av)
 	return (0);
 }
 
-static int 				init_table(t_table **table, char **av)
+static int			init_table(t_table **table, char **av)
 {
-	int					ret;
+	int				ret;
 
 	if (!(*table = malloc(sizeof(t_table))))
 		return (ERR_MALLOC);
@@ -68,9 +64,9 @@ static int 				init_table(t_table **table, char **av)
 	return (0);
 }
 
-static int				init_forks(pthread_mutex_t **forks, int n)
+static int			init_forks(pthread_mutex_t **forks, int n)
 {
-	int					i;
+	int				i;
 
 	if (!(*forks = malloc(n * sizeof(pthread_mutex_t))))
 		return (ERR_MALLOC);
@@ -84,7 +80,7 @@ static int				init_forks(pthread_mutex_t **forks, int n)
 	return (0);
 }
 
-static int				init_mutex(pthread_mutex_t **mutex)
+static int			init_mutex(pthread_mutex_t **mutex)
 {
 	if (!(*mutex = malloc(sizeof(pthread_mutex_t))))
 		return (ERR_MALLOC);

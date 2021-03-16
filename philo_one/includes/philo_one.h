@@ -18,8 +18,8 @@
 # include <unistd.h>
 # include <pthread.h>
 
-int 	g_n_philos;
-int 	g_is_satisfied;
+int					g_n_philos;
+int					g_is_satisfied;
 
 typedef struct		s_table
 {
@@ -41,12 +41,17 @@ typedef struct		s_philo
 	pthread_mutex_t	*fork_r;
 	pthread_t		*thread;
 	int				eat_times;
-	int 			check_die;
+	int				check_die;
 }					t_philo;
 
-int init_philos(t_philo *philos, char **av);
+int					init_philos(t_philo *philos, char **av);
+static int			init_table(t_table **table, char **av);
+static int			init_forks(pthread_mutex_t **forks, int n);
+static int			init_mutex(pthread_mutex_t **mutex);
+
 void				*life_cycle(void *data);
-void			 	*check_die(void *data);
+static int			eat(t_philo *philo);
+void				*check_die(void *data);
 void				ft_safety_exit(int status, t_philo *philos);
 
 #endif

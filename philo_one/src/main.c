@@ -29,7 +29,6 @@ int						main(int ac, char **av)
 
 	if (ac < 5 || ac > 6 || (ac == 5 && ft_atoi(av[4]) == 0))
 		return (ERR_ARGS);
-//	g_is_satisfied = 0;
 	g_n_philos = ft_atoi(av[1]);
 	if ((ret = init_philos(philos, av)))
 		return (ret);
