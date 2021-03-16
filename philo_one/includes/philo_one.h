@@ -40,7 +40,6 @@ typedef struct		s_philo
 	pthread_mutex_t	*fork_r;
 	pthread_t		*thread;
 	int				eat_times;
-	int				check_die;
 }					t_philo;
 
 int					init_philos(t_philo *philos, char **av);

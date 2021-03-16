@@ -33,7 +33,6 @@ int					init_philos(t_philo *philos, char **av)
 		philos[i].fork_r = &forks[(i + 1) % g_n_philos];
 		philos[i].fork_l = &forks[i];
 		philos[i].eat_times = av[5] ? ft_atoi(av[5]) : -1;
-		philos[i].check_die = 0;
 	}
 	return (0);
 }
