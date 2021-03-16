@@ -23,26 +23,23 @@ void 				*life_cycle(void *data)
 	philo = (t_philo *)data;
 	philo->table->start = ft_get_time();
 	philo->last_eat = philo->table->start;
-
-	g_check_die = 1;
 	if (philo->id % 2)
 		ft_mysleep(philo->table->eat);
 	while (philo->eat_times != 0)
 	{
-		if (eat(philo))
-			break ;
+		eat(philo);
 		if (philo->eat_times == 0)
 		{
-//			pthread_mutex_lock(philo->table->satisfied);
 			++g_is_satisfied;
-//			pthread_mutex_unlock(philo->table->satisfied);
 			break ;
 		}
+		pthread_mutex_lock(philo->table->print);
 		ft_print_status(philo->id, philo->table->start, MSG_SLEEPING);
+		pthread_mutex_unlock(philo->table->print);
 		ft_mysleep(philo->table->sleep);
+		pthread_mutex_lock(philo->table->print);
 		ft_print_status(philo->id, philo->table->start, MSG_THINKING);
-//		if (g_check_die)
-//			break ;
+		pthread_mutex_unlock(philo->table->print);
 	}
 	return (NULL);
 }
@@ -50,13 +47,14 @@ void 				*life_cycle(void *data)
 static int			eat(t_philo *philo)
 {
 	pthread_mutex_lock(philo->fork_l);
+	pthread_mutex_lock(philo->table->print);
 	ft_print_status(philo->id, philo->table->start, MSG_TAKEN_FORK);
-//	pthread_mutex_unlock(philo->table->print);
-//	if (g_check_die)
-//		return (-1);
+	pthread_mutex_unlock(philo->table->print);
 	pthread_mutex_lock(philo->fork_r);
+	pthread_mutex_lock(philo->table->print);
 	ft_print_status(philo->id, philo->table->start, MSG_TAKEN_FORK);
 	ft_print_status(philo->id, philo->table->start, MSG_EATING);
+	pthread_mutex_unlock(philo->table->print);
 	--philo->eat_times;
 	philo->last_eat = ft_get_time();
 	ft_mysleep(philo->table->eat);

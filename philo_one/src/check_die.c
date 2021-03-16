@@ -20,25 +20,23 @@ void				*check_die(void *data)
 	unsigned int	t_to_die;
 	int 			i;
 
-//	while (!g_check_die)
-//		;
 	philo = data;
 	t_to_die = philo[0].table->die * 1000;
 	while (1)
 	{
-//		if (g_is_satisfied == g_n_philos)
-//		{
-//			pthread_mutex_lock(philo->printing);
-//			return (0);
-//		}
 		i = -1;
 		while (++i < g_n_philos)
 		{
+			if (g_is_satisfied == g_n_philos)
+			{
+				pthread_mutex_lock(philo->table->print);
+				return (0);
+			}
 			usleep(100);
 			if (philo[i].last_eat + t_to_die < ft_get_time())
 			{
-				ft_print_status(philo[i].id, philo[i].table->start, MSG_DIED);
 				pthread_mutex_lock(philo->table->print);
+				ft_print_status(philo[i].id, philo[i].table->start, MSG_DIED);
 				return (0);
 			}
 		}
