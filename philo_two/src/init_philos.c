@@ -14,6 +14,7 @@
 #include "init_philos.h"
 #include "utils.h"
 #include "errors.h"
+#include <stdlib.h>
 
 int					init_philos(t_philo *philos, char **av)
 {
@@ -33,7 +34,6 @@ int					init_philos(t_philo *philos, char **av)
 		philos[i].fork_r = &forks[(i + 1) % g_n_philos];
 		philos[i].fork_l = &forks[i];
 		philos[i].eat_times = av[5] ? ft_atoi(av[5]) : -1;
-		philos[i].check_die = 0;
 	}
 	return (0);
 }
@@ -50,11 +50,6 @@ static int			init_table(t_table **table, char **av)
 		return (ret);
 	}
 	if ((ret = init_mutex(&(*table)->print)))
-	{
-		free(table);
-		return (ret);
-	}
-	if ((ret = init_mutex(&(*table)->satisfied)))
 	{
 		free(table);
 		return (ret);
