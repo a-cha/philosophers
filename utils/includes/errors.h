@@ -20,7 +20,8 @@ enum	e_errors
 	ERR_PTHREAD,
 	ERR_MUTEX,
 	ERR_SEMAPHORE,
-	ERR_ARGS
+	ERR_ARGS,
+	ERR_PROCESS
 };
 
 #endif

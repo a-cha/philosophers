@@ -16,6 +16,7 @@
 # include <pthread.h>
 # include <semaphore.h>
 # include <signal.h>
+# include <unistd.h>
 
 # define SEM_FORKS	"forks_sem"
 # define SEM_PRINT	"print_sem"
@@ -38,6 +39,7 @@ typedef struct		s_table
 typedef struct		s_philo
 {
 	int				id;
+	pid_t			pid;
 	long			last_eat;
 	t_table			*table;
 	pthread_t		*thread;

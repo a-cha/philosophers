@@ -17,42 +17,12 @@
 
 void				*check_die_each(void *data)
 {
-	t_philo			*philo;
-	long			t_to_die;
-
-	philo = data;
-	t_to_die = philo->table->die * 1000;
-	while (1)
-	{
-//		if (g_check_die)
-//			return (NULL);
-		usleep(100);
-//		когда наелся один
-		if (philo->eat_times == 0)
-		{
-			sem_wait(philo->table->print);
-			return (0);
-		}
-		if (philo->last_eat + t_to_die < ft_get_time())
-		{
-			sem_wait(philo->table->print);
-			ft_print_status(philo->id, philo->table->start, MSG_DIED);
-			return (0);
-		}
-	}
-//	g_check_die = 1;
-	return (0);
-}
-
-/*
-void			*check_die(void *data)
-{
 	t_philo		*philo;
-	int			t_to_die;
+	long		t_to_die;
 	int			i;
 
 	philo = data;
-	t_to_die = philo[0].table->die * 1000;
+	t_to_die = philo->table->die * 1000;
 	while (1)
 	{
 		i = -1;
@@ -64,13 +34,12 @@ void			*check_die(void *data)
 				return (0);
 			}
 			usleep(100);
-			if (philo[i].last_eat + t_to_die < ft_get_time())
+			if (philo->last_eat + t_to_die < ft_get_time())
 			{
 				sem_wait(philo->table->print);
-				ft_print_status(philo[i].id, philo[i].table->start, MSG_DIED);
+				ft_print_status(philo->id, philo->table->start, MSG_DIED);
 				return (0);
 			}
 		}
 	}
 }
-*/

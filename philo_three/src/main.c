@@ -35,11 +35,12 @@ int						main(int ac, char **av)
 	i = -1;
 	while (++i < g_n_philos)
 		philos[i].thread = &threads[i];
+//	pthread_create(thread_die, NULL, &check_die, &philos);
 	i = -1;
 	while (++i < g_n_philos)
 		pthread_create(&threads[i], NULL, &life_cycle, &philos[i]);
 	i = -1;
 	while (++i < g_n_philos)
-		pthread_join(threads[i], NULL);
+		pthread_join(*philos[i].thread, NULL);
 	ft_safety_exit(0, philos);
 }
