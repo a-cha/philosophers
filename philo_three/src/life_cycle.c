@@ -17,20 +17,21 @@
 void				*life_cycle(void *data)
 {
 	t_philo			*philo;
+	pthread_t		thread_die[1];
 
 	philo = (t_philo *)data;
 	philo->table->start = ft_get_time();
 	philo->last_eat = philo->table->start;
-	if (philo->id % 2)
-		ft_mysleep(philo->table->eat);
+	if ((pthread_create(thread_die, NULL, &check_die_each, data)))
+		return (NULL);
+//	pthread_detach(*thread_die);
+//	pthread_detach(*philo->thread);
 	while (philo->eat_times != 0)
 	{
 		eat(philo);
 		if (philo->eat_times == 0)
-		{
-			++g_is_satisfied;
-			break ;
-		}
+//			TODO need to return smth special
+			return NULL;
 		sem_wait(philo->table->print);
 		ft_print_status(philo->id, philo->table->start, MSG_SLEEPING);
 		sem_post(philo->table->print);

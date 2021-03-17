@@ -24,7 +24,7 @@ int						main(int ac, char **av)
 	int					i;
 	t_philo				philos[av[1] ? ft_atoi(av[1]) : 0];
 	pthread_t			threads[av[1] ? ft_atoi(av[1]) : 0];
-	pthread_t			thread_die[1];
+//	pthread_t			thread_die[1];
 	int					ret;
 
 	if (ac < 5 || ac > 6 || (ac == 5 && ft_atoi(av[4]) == 0))
@@ -35,10 +35,11 @@ int						main(int ac, char **av)
 	i = -1;
 	while (++i < g_n_philos)
 		philos[i].thread = &threads[i];
-	pthread_create(thread_die, NULL, &check_die, &philos);
 	i = -1;
 	while (++i < g_n_philos)
 		pthread_create(&threads[i], NULL, &life_cycle, &philos[i]);
-	pthread_join(*thread_die, NULL);
+	i = -1;
+	while (++i < g_n_philos)
+		pthread_join(threads[i], NULL);
 	ft_safety_exit(0, philos);
 }

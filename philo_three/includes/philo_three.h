@@ -15,10 +15,11 @@
 
 # include <pthread.h>
 # include <semaphore.h>
+# include <signal.h>
 
-# define SEM_FORKS "forks_sem"
-# define SEM_PRINT "print_sem"
-# define SEM_WAITER "waiter_sem"
+# define SEM_FORKS	"forks_sem"
+# define SEM_PRINT	"print_sem"
+# define SEM_WAITER	"waiter_sem"
 
 int					g_n_philos;
 int					g_is_satisfied;
@@ -47,6 +48,7 @@ int					init_philos(t_philo *philos, char **av);
 void				*life_cycle(void *data);
 int					eat(t_philo *philo);
 void				*check_die(void *data);
+void				*check_die_each(void *data);
 void				ft_safety_exit(int status, t_philo *philos);
 
 #endif
