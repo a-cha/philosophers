@@ -24,6 +24,7 @@ void				*life_cycle(void *data)
 	philo->last_eat = philo->table->start;
 	if ((pthread_create(thread_die, NULL, &check_die_each, data)))
 		return (NULL);
+	pthread_detach(*thread_die);
 //	if (philo->id % 2)
 //		ft_mysleep(philo->table->eat);
 	while (philo->eat_times != 0)
@@ -31,7 +32,7 @@ void				*life_cycle(void *data)
 		eat(philo);
 		if (philo->eat_times == 0)
 		{
-			++g_is_satisfied;
+			philo->table->is_satisfied++;
 			break ;
 		}
 		sem_wait(philo->table->print);

@@ -18,9 +18,11 @@
 # include <signal.h>
 # include <unistd.h>
 
-# define SEM_FORKS	"forks_sem"
-# define SEM_PRINT	"print_sem"
-# define SEM_WAITER	"waiter_sem"
+# define SEM_FORKS		"forks_sem"
+# define SEM_PRINT		"print_sem"
+# define SEM_WAITER		"waiter_sem"
+# define SEM_DIE		"die_sem"
+# define SEM_SATISFIED	"satisfied_sem"
 
 int					g_n_philos;
 int					g_is_satisfied;
@@ -34,6 +36,8 @@ typedef struct		s_table
 	sem_t			*forks;
 	sem_t			*print;
 	sem_t			*waiter;
+	sem_t			*is_die;
+	sem_t			*is_satisfied;
 }					t_table;
 
 typedef struct		s_philo
@@ -42,14 +46,14 @@ typedef struct		s_philo
 	pid_t			pid;
 	long			last_eat;
 	t_table			*table;
-	pthread_t		*thread;
+//	pthread_t		*thread;
 	int				eat_times;
 }					t_philo;
 
 int					init_philos(t_philo *philos, char **av);
 void				*life_cycle(void *data);
 int					eat(t_philo *philo);
-void				*check_die(void *data);
+//void				*check_die(void *data);
 void				*check_die_each(void *data);
 void				ft_safety_exit(int status, t_philo *philos);
 

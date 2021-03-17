@@ -19,15 +19,11 @@ void				*check_die_each(void *data)
 {
 	t_philo		*philo;
 	long		t_to_die;
-	int			i;
 
 	philo = data;
 	t_to_die = philo->table->die * 1000;
 	while (1)
 	{
-		i = -1;
-		while (++i < g_n_philos)
-		{
 			if (g_is_satisfied == g_n_philos)
 			{
 				sem_wait(philo->table->print);
@@ -36,10 +32,10 @@ void				*check_die_each(void *data)
 			usleep(100);
 			if (philo->last_eat + t_to_die < ft_get_time())
 			{
-				sem_wait(philo->table->print);
 				ft_print_status(philo->id, philo->table->start, MSG_DIED);
+				sem_wait(philo->table->print);
+				sem_post(philo->table->is_die);
 				return (0);
 			}
-		}
 	}
 }
