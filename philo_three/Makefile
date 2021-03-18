@@ -33,7 +33,10 @@ SRC :=						\
 	main.c
 
 OBJ := ${SRC:.c=.o}
+DEP := ${SRC:.c=.d}
 O_WITH_DIR := $(addprefix $(OBJ_DIR), $(OBJ))
+D_WITH_DIR := $(addprefix $(OBJ_DIR), $(DEP))
+
 
 all: $(UTILS_NAME) $(NAME)
 
@@ -41,10 +44,11 @@ $(NAME): $(O_WITH_DIR)
 	$(CC) $(CFLAGS) -o $@ $(LINK_INC) $(LINK_LIB) $^
 	@echo "\033[32m$(NAME)\033[0m successfully created" ✅
 
-#TODO Выставить зависимости от хэдэров
-$(OBJ_DIR)%.o: $(SRC_DIR)%.c includes/philo_three.h includes/init_philos.h ../utils/includes/utils.h ../utils/includes/errors.h ../utils/includes/ft_print_status.h
+-include $(D_WITH_DIR)
+
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(OBJ_DIR)
-	$(CC) $(CFLAGS) $(LINK_INC) -c $< -o $@
+	$(CC) $(CFLAGS) $(LINK_INC) -c $< -o $@ -MMD
 
 $(UTILS_NAME):
 	make -C $(UTILS_DIR)
@@ -59,3 +63,6 @@ fclean: clean
 	make -C $(UTILS_DIR) fclean
 
 re: fclean all
+
+.PHONY: all clean fclean re
+
