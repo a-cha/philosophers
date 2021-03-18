@@ -44,7 +44,7 @@ $(NAME): $(O_WITH_DIR)
 	$(CC) $(CFLAGS) -o $@ $(LINK_INC) $(LINK_LIB) $^
 	@echo "\033[32m$(NAME)\033[0m successfully created" ✅
 
-include $(D_WITH_DIR)
+-include $(D_WITH_DIR)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(OBJ_DIR)
