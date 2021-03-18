@@ -24,17 +24,19 @@ void				*check_die_each(void *data)
 	t_to_die = philo->table->die * 1000;
 	while (1)
 	{
-			if (g_is_satisfied == g_n_philos)
-			{
-				sem_wait(philo->table->print);
-				return (0);
-			}
 			usleep(100);
+//			if (philo->is_satisfied)
+//			{
+//				sem_wait(philo->table->print);
+//				return (0);
+//			}
 			if (philo->last_eat + t_to_die < ft_get_time())
 			{
+				sem_wait(philo->table->sem_print);
+				sem_wait(philo->sem_print_philo);
 				ft_print_status(philo->id, philo->table->start, MSG_DIED);
-				sem_wait(philo->table->print);
-				sem_post(philo->table->is_die);
+				sem_post(philo->table->sem_is_die);
+//				sem_post(philo->table->sem_is_satisfied);
 				return (0);
 			}
 	}

@@ -13,6 +13,9 @@
 #include "philo_three.h"
 #include "utils.h"
 #include "ft_print_status.h"
+#include <stdlib.h>
+
+void input_msg(t_philo *philo, char *msg);
 
 void				*life_cycle(void *data)
 {
@@ -25,44 +28,44 @@ void				*life_cycle(void *data)
 	if ((pthread_create(thread_die, NULL, &check_die_each, data)))
 		return (NULL);
 	pthread_detach(*thread_die);
-//	if (philo->id % 2)
-//		ft_mysleep(philo->table->eat);
-	while (philo->eat_times != 0)
+	while (1)
 	{
 		eat(philo);
 		if (philo->eat_times == 0)
 		{
-			philo->table->is_satisfied++;
-			break ;
+			sem_post(philo->table->sem_is_die);
+			sem_wait(philo->sem_print_philo);
+			exit(0);
 		}
-		sem_wait(philo->table->print);
-		ft_print_status(philo->id, philo->table->start, MSG_SLEEPING);
-		sem_post(philo->table->print);
+		input_msg(philo, MSG_SLEEPING);
 		ft_mysleep(philo->table->sleep);
-		sem_wait(philo->table->print);
-		ft_print_status(philo->id, philo->table->start, MSG_THINKING);
-		sem_post(philo->table->print);
+		input_msg(philo, MSG_THINKING);
 	}
-	return (NULL);
+}
+
+void input_msg(t_philo *philo, char *msg)
+{
+	sem_wait(philo->table->sem_print);
+	sem_wait(philo->sem_print_philo);
+	ft_print_status(philo->id, philo->table->start, msg);
+	sem_post(philo->sem_print_philo);
+	sem_post(philo->table->sem_print);
+
 }
 
 int					eat(t_philo *philo)
 {
-	sem_wait(philo->table->waiter);
-	sem_wait(philo->table->forks);
-	sem_wait(philo->table->print);
-	ft_print_status(philo->id, philo->table->start, MSG_TAKEN_FORK);
-	sem_post(philo->table->print);
-	sem_wait(philo->table->forks);
-	sem_wait(philo->table->print);
-	ft_print_status(philo->id, philo->table->start, MSG_TAKEN_FORK);
-	ft_print_status(philo->id, philo->table->start, MSG_EATING);
-	sem_post(philo->table->print);
+	sem_wait(philo->table->sem_waiter);
+	sem_wait(philo->table->sem_forks);
+	input_msg(philo, MSG_TAKEN_FORK);
+	sem_wait(philo->table->sem_forks);
+	input_msg(philo, MSG_TAKEN_FORK);
+	input_msg(philo, MSG_EATING);
 	--philo->eat_times;
 	philo->last_eat = ft_get_time();
 	ft_mysleep(philo->table->eat);
-	sem_post(philo->table->forks);
-	sem_post(philo->table->forks);
-	sem_post(philo->table->waiter);
+	sem_post(philo->table->sem_forks);
+	sem_post(philo->table->sem_forks);
+	sem_post(philo->table->sem_waiter);
 	return (0);
 }
