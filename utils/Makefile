@@ -29,8 +29,9 @@ SRC :=						\
 	ft_get_time.c
 
 OBJ := ${SRC:.c=.o}
+DEP := ${SRC:.c=.d}
 O_WITH_DIR := $(addprefix $(OBJ_DIR), $(OBJ))
-
+D_WITH_DIR := $(addprefix $(OBJ_DIR), $(DEP))
 
 all: $(NAME)
 
@@ -38,10 +39,11 @@ $(NAME): $(O_WITH_DIR)
 	ar rc $@ $?
 	@echo "\033[32m$(NAME)\033[0m successfully created" ✅
 
-#TODO Выставить зависимости от хэдэров
+include $(D_WITH_DIR)
+
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@mkdir -p $(OBJ_DIR)
-	$(CC) $(CFLAGS) $(LINK_INC) -c $< -o $@
+	$(CC) $(CFLAGS) $(LINK_INC) -c $< -o $@ -MMD
 
 # Standard rules
 clean:
@@ -51,3 +53,5 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+
+.PHONY: all clean fclean re
