@@ -31,7 +31,6 @@ int					init_philos(t_philo *philos, char **av)
 		philos[i].eat_times = av[5] ? ft_atoi(av[5]) : -1;
 		if (!(philos[i].sem_print_philo = init_sem(SEM_PRINT_PHILO, 1)))
 			return (ERR_SEMAPHORE);
-//		philos[i].is_satisfied = 0;
 	}
 	return (0);
 }
@@ -44,8 +43,7 @@ static int			init_table(t_table **table, char **av)
 			!((*table)->sem_forks = init_sem(SEM_FORKS, g_n_philos)) ||
 			!((*table)->sem_print = init_sem(SEM_PRINT, 1)) ||
 			!((*table)->sem_waiter = init_sem(SEM_WAITER, g_n_philos / 2)) ||
-			!((*table)->sem_is_die = init_sem(SEM_DIE, 0)) ||
-			!((*table)->sem_is_satisfied = init_sem(SEM_SATISFIED, 0)))
+			!((*table)->sem_is_die = init_sem(SEM_DIE, 0)))
 		return (ERR_SEMAPHORE);
 	(*table)->die = ft_atoi(av[2]);
 	(*table)->eat = ft_atoi(av[3]);

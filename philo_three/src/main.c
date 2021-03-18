@@ -13,12 +13,11 @@
 #include "philo_three.h"
 #include "utils.h"
 #include "errors.h"
+#include <signal.h>
 
 /*
-** Runs a single thread for each philosopher's life cycle
-** And one more thread to check whether philo is dead
+** Runs a separate process for each philosopher's life cycle
 */
-#include <sys/wait.h>
 
 int						main(int ac, char **av)
 {

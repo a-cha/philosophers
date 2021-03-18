@@ -15,12 +15,10 @@
 #include "ft_print_status.h"
 #include <stdlib.h>
 
-void input_msg(t_philo *philo, char *msg);
-
 void				*life_cycle(void *data)
 {
 	t_philo			*philo;
-	pthread_t 		thread_die[1];
+	pthread_t		thread_die[1];
 
 	philo = (t_philo *)data;
 	philo->table->start = ft_get_time();
@@ -43,16 +41,6 @@ void				*life_cycle(void *data)
 	}
 }
 
-void input_msg(t_philo *philo, char *msg)
-{
-	sem_wait(philo->table->sem_print);
-	sem_wait(philo->sem_print_philo);
-	ft_print_status(philo->id, philo->table->start, msg);
-	sem_post(philo->sem_print_philo);
-	sem_post(philo->table->sem_print);
-
-}
-
 int					eat(t_philo *philo)
 {
 	sem_wait(philo->table->sem_waiter);
@@ -68,4 +56,13 @@ int					eat(t_philo *philo)
 	sem_post(philo->table->sem_forks);
 	sem_post(philo->table->sem_waiter);
 	return (0);
+}
+
+void				input_msg(t_philo *philo, char *msg)
+{
+	sem_wait(philo->table->sem_print);
+	sem_wait(philo->sem_print_philo);
+	ft_print_status(philo->id, philo->table->start, msg);
+	sem_post(philo->sem_print_philo);
+	sem_post(philo->table->sem_print);
 }
