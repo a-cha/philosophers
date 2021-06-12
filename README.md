@@ -1,6 +1,6 @@
 # Dining Philosophers
 
-#### There are three different solutuions to the task:
+#### There are three different solutuions to the [Dining Philosophers problem](https://en.wikipedia.org/wiki/Dining_philosophers_problem):
 
 - philo_one: philosophers as _**threads**_, forks as _**mutexes**_
 - philo_two: philosophers as _**threads**_, forks as _**semaphores**_
