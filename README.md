@@ -10,6 +10,7 @@
 
 Run `make` inside the philo_one/two/three directory to create a 
 binary file.
+
 Run the program like `./philo_one 5 600 200 100 10`, where specified parameters are:
 - `5` - number_of_philosophers: is the number of philosophers and also the number of forks
 - `600` - time_to_die: is in milliseconds, if a philosopher doesn’t start eating ’time_to_die’ milliseconds after starting his last meal, he dies
