@@ -4,9 +4,9 @@
 
 #### There are three different solutuions to the task:
 
-- philo_one: philosophers as #####threads, forks as #####mutexes
-- philo_two: philosophers as threads, forks as semaphores
-- philo_three: philosophers as processes, forks as semaphores
+- philo_one: philosophers as **threads**, forks as **mutexes**
+- philo_two: philosophers as **threads**, forks as **semaphores**
+- philo_three: philosophers as **processes**, forks as **semaphores**
 
 ## Usage
 
