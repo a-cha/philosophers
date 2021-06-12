@@ -1,16 +1,18 @@
 # Dining Philosophers
 
-###### _Three solves for the classical Dining Philosophers problem_
-
 #### There are three different solutuions to the task:
 
-- philo_one: philosophers as **threads**, forks as **mutexes**
+- philo_one: philosophers as _**threads**_, forks as _**mutexes**_
 - philo_two: philosophers as **threads**, forks as **semaphores**
 - philo_three: philosophers as **processes**, forks as **semaphores**
 
 ## Usage
 
-Run `make` inside the repository's directory to create a 
-library file. Now the `libasm.a` library at your disposal.
-
-Run `make test` creates binary file using `libasm.a` to test it.
+Run `make` inside the philo_one/two/three directory to create a 
+binary file.
+Run the program like `./philo_one 5 600 200 100 10`, where arguments are:
+- `5` - number_of_philosophers: is the number of philosophers and also the number of forks
+- `600` - time_to_die: is in milliseconds, if a philosopher doesn’t start eating ’time_to_die’ milliseconds after starting his last meal, he dies
+- `200` - time_to_eat: is in milliseconds and is the time it takes for a philosopher to eat
+- `100` - time_to_sleep: is in milliseconds and is the time the philosopher will spend sleeping
+- `10` - number_of_times_each_philosopher_must_eat: argument is optional, if all philosophers eat at least ’number_of_times_each_philosopher_must_eat’ the simulation will stop. If not specified, the simulation will stop only at the death of a philosopher
