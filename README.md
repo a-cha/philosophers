@@ -21,7 +21,7 @@ Run the program like `./philo_one 5 600 200 100 10` with some necessary argument
 
 <details>
     <summary>
-        What is arguments?
+        <b>What is arguments?</b>
     </summary>
     <br/>
     <ol>
