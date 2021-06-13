@@ -10,6 +10,8 @@ In the task's context philosophers considered as processes and forks as resource
 - philo_two - philosophers as _**threads**_, forks as _**semaphores**_
 - philo_three - philosophers as _**processes**_, forks as _**semaphores**_
 
+<img width="500" src="https://user-images.githubusercontent.com/81406370/121813554-2477c100-cc75-11eb-98d9-aef3fcef984e.gif">
+
 ## Usage
 
 Run `make` inside the philo_one/two/three directory to create a 
