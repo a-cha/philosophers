@@ -6,9 +6,9 @@ In the task's context philosophers considered as processes and forks as resource
 
 #### There are three different solutuions:
 
-- philo_one: philosophers as _**threads**_, forks as _**mutexes**_
-- philo_two: philosophers as _**threads**_, forks as _**semaphores**_
-- philo_three: philosophers as _**processes**_, forks as _**semaphores**_
+- philo_one - philosophers as _**threads**_, forks as _**mutexes**_
+- philo_two - philosophers as _**threads**_, forks as _**semaphores**_
+- philo_three - philosophers as _**processes**_, forks as _**semaphores**_
 
 ## Usage
 
